@@ -21,9 +21,10 @@ public class RegistrationController {
     @GetMapping("/")
     public String registrationPage (WebRequest request, Model model) {
         Users user = new Users();
-        model.addAttribute("user", user);
+       model.addAttribute("user", user);
         return "registration";
     }
+
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid Users user,
                                             HttpServletRequest request, Errors errors) {
 
@@ -37,5 +38,26 @@ public class RegistrationController {
         String message() default "Invalid email";
         Class<?>[] groups() default {};
         Class<? extends Payload>[] payload() default {};
+    }
+    @Target({TYPE,ANNOTATION_TYPE})
+    @Retention(RUNTIME)
+    @Constraint(validatedBy = PasswordMatchesValidation.class)
+    @Documented
+    public @interface PasswordMatches {
+        String message() default "Passwords don't match";
+        Class<?>[] groups() default {};
+        Class<? extends Payload>[] payload() default {};
+    }
+    public class PasswordMatchValidation implements ConstraintValidator<RegistrationController.PasswordMatches, Object> {
+
+        @Override
+        public void initialize(RegistrationController.PasswordMatches constraintAnnotation) {
+            ConstraintValidator.super.initialize(constraintAnnotation);
+        }
+
+        @Override
+        public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
+            return false;
+        }
     }
 }

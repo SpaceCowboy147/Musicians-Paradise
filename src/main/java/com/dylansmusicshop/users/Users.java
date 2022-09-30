@@ -2,6 +2,8 @@ package com.dylansmusicshop.users;
 
 import com.dylansmusicshop.controller.RegistrationController;
 
+import com.dylansmusicshop.controller.RegistrationController;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 

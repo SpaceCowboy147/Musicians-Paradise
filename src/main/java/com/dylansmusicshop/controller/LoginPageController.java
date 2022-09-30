@@ -27,7 +27,10 @@ import javax.validation.Valid;
         return "shopHome";
     }
 
-}
+//        @GetMapping("/")
+//        public String registrationPage() {
+//return "registration";
+        }
 
 
 
