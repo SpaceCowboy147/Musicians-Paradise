@@ -1,13 +1,11 @@
-package com.dylansmusicshop.users;
+package com.dylansmusicshop.registration;
 
-import com.dylansmusicshop.controller.RegistrationController;
-
-import com.dylansmusicshop.controller.RegistrationController;
-
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class Users {
+public class UserDTO {
+
 
     private int id;
     @NotNull
@@ -19,8 +17,11 @@ public class Users {
     private String password;
     @NotNull
     @NotEmpty
-    @RegistrationController.ValidEmail
+    @Email
     private String email;
+    @NotNull
+    @NotEmpty
+    private String role;
     @NotNull
     @NotEmpty
     private String shippingAddress;
@@ -33,6 +34,9 @@ public class Users {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getRole() { return username; }
+    public void setRole(String role) { this.role = role; }
 
     public String getEmail() {
         return email;
@@ -53,5 +57,7 @@ public class Users {
         this.password = password;
     }
 
-    }
+}
+
+
 

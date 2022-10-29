@@ -1,33 +1,34 @@
 package com.dylansmusicshop.dao;
 
-import com.dylansmusicshop.users.Users;
+import com.dylansmusicshop.registration.UserDTO;
+
 
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAO implements Dao<Users>{
+public class UserDAO implements Dao<UserDTO>{
     @Override
-    public Optional<Users> get(long id) {
+    public Optional<UserDTO> get(long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Users> getAll() {
+    public List<UserDTO> getAll() {
         return null;
     }
 
     @Override
-    public void save(Users users) {
+    public void save(UserDTO users) {
 
     }
 
     @Override
-    public void update(Users users, String[] params) {
+    public void update(UserDTO users, String[] params) {
 
     }
 
     @Override
-    public void delete(Users users) {
+    public void delete(UserDTO users) {
 
     }
 }

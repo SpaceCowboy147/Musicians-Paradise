@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         AuthenticationSuccessHandler myAuthenticationSuccessHandler = null;
-        http.csrf().disable()
+                http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
@@ -43,27 +43,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .loginProcessingUrl("/logging-in")
+                        .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/shopHome", true)
+
                 .failureUrl("/login-error")
-                .successHandler(myAuthenticationSuccessHandler)
-                .failureHandler((AuthenticationFailureHandler) authenticationManager())
+               // .successHandler(myAuthenticationSuccessHandler)
+              //  .failureHandler((AuthenticationFailureHandler) authenticationManager())
 
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .clearAuthentication(true)
-              //  .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID");
-        // .logoutSuccessHandler(logoutSuccessHandler());
+
 
     }
-//    @Configuration
-//    @ImportResource({ "classpath:webSecurityConfig.xml" })
-//    public class SecSecurityConfig {
-//        public SecSecurityConfig() {
-//            super();
-//        }
+
     }
 
 

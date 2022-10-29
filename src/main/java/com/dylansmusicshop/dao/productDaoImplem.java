@@ -1,9 +1,5 @@
 package com.dylansmusicshop.dao;
 
-import com.dylansmusicshop.products.Products;
-
-import java.util.List;
-
 //public class productDaoImplem implements productDAO {
 // List products;
 //

@@ -1,5 +1,5 @@
 <head>
-<link rel="stylesheet" href="/registration.css">
+<link rel="stylesheet" href="registration">
 </head>
 
 <div id="contentContainer" class="container">
@@ -36,14 +36,13 @@
               <div class="col-sm-6 col-xs-12">
                 <div class="row">
                   <div class="col-xs-12">
-                    <form id="signupForm" method="post" accept-charset="UTF-8" validate>
+                    <form id="signupForm" method=post accept-charset="UTF-8" action = registerServlet>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user-secret icon-2x"></i></i></span>
-                        <input id="name" class="form-control input-lg" placeholder="Full Name" maxlength="100" type="text" name="name">
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="icon-user icon-2x"></i></span>
-                        <input id="handle" class="form-control input-lg" placeholder="Username" maxlength="100" type="text" name="handle">
+                        <input id="handle" class="form-control input-lg" placeholder="Username" maxlength="100" type="text" name="username">
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="icon-envelope icon-2x"></i></span>
@@ -67,7 +66,7 @@
                     <div class="form-group">
 
                       <div class="topCushion">Already a member? <a href="login">Login</a></div>
-                      <div class="topCushion">Continue as guest? <a href="shopHome">Contiue</a></div>
+                      <div class="topCushion">Continue as guest? <a href="shopHome">Continue</a></div>
                     </div>
                   </div>
                   <!-- /.col-xs-12 -->
