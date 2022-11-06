@@ -15,7 +15,7 @@ import javax.validation.Valid;
 public class RegistrationController {
 
 
-  @GetMapping("/user/registration")
+  @GetMapping("/registration")
   public String showRegistrationForm() {
 //    UserDTO userDto = new UserDTO();
 //    model.addAttribute("user", userDto);
@@ -25,6 +25,6 @@ public class RegistrationController {
   @PostMapping
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDto,
                                             HttpServletRequest request, Errors errors) {
-      return registerUserAccount(userDto, request, errors);
+      return null;
     }
 }

@@ -35,7 +35,7 @@ public class UserDTO {
         this.username = username;
     }
 
-    public String getRole() { return username; }
+    public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
     public String getEmail() {
