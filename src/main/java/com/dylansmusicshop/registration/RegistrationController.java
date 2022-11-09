@@ -17,14 +17,9 @@ public class RegistrationController {
 
   @GetMapping("/registration")
   public String showRegistrationForm() {
-//    UserDTO userDto = new UserDTO();
-//    model.addAttribute("user", userDto);
+
     return "registration";
   }
 
-  @PostMapping
-    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDto,
-                                            HttpServletRequest request, Errors errors) {
-      return null;
-    }
+
 }

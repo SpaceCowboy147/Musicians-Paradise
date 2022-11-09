@@ -18,7 +18,6 @@ public class registerServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         try {
             response.setContentType("text/html");
 
@@ -29,7 +28,7 @@ public class registerServlet extends HttpServlet {
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
 
-            PreparedStatement registerUser = connection.prepareStatement("INSERT into users values(?,?,?,?,?)");
+            PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, role, password, address, email) values(?,?,?,?,?)");
             registerUser.setString(1, userName);
             registerUser.setString(2, "user");
             registerUser.setString(3, password);
@@ -38,15 +37,12 @@ public class registerServlet extends HttpServlet {
             registerUser.executeUpdate();
            connection.close();
             PrintWriter out = response.getWriter();
-            out.println("<html><body><b>Successfully Inserted"
+            out.println("<html><body><b>Successfully inserted"
                     + "</b></body></html>");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
         }
 

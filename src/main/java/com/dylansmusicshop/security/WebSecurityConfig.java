@@ -42,13 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/login")
                         .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/shopHome", true)
-
                 .failureUrl("/login-error")
-               // .successHandler(myAuthenticationSuccessHandler)
-              //  .failureHandler((AuthenticationFailureHandler) authenticationManager())
+
 
                 .and()
                 .logout()
