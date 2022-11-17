@@ -21,16 +21,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser("user").password(encoder.encode("password")).roles("USER")
-                .and()
-                .withUser("admin").password(encoder.encode("123")).roles("ADMIN", "USER");
+
     }
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-        AuthenticationSuccessHandler myAuthenticationSuccessHandler = null;
+
                 http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -43,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl("/loginServlet")
                 .defaultSuccessUrl("/shopHome", true)
                 .failureUrl("/login-error")
 
