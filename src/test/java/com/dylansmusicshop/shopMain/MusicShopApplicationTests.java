@@ -16,25 +16,25 @@ import java.sql.PreparedStatement;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@SpringBootTest
-@TestExecutionListeners
-@ContextConfiguration
+//@SpringBootTest
+//@TestExecutionListeners
+//@ContextConfiguration
+//
+//class MusicShopApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//
+//    }
+//
+//    @Test
+//    public void testRegisterUser() {
+//        registerServlet registerServlet = new registerServlet();
+//
+//   registerServlet.getServletConfig();
+//        registerServlet.getServletInfo();
 
-class MusicShopApplicationTests {
-
-    @Test
-    void contextLoads() {
-
-    }
-
-    @Test
-    public void testRegisterUser() {
-        registerServlet registerServlet = new registerServlet();
-        registerServlet.getServletConfig();
-        registerServlet.getServletInfo();
-
-
-        }
-    }
+//        }
+//    }
 
 

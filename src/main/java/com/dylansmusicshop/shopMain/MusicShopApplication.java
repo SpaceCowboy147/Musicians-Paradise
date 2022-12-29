@@ -12,8 +12,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration, com.dylansmusicshop.security"} )
-@ServletComponentScan({"com.dylansmusicshop.registration", "com.dylansmusicshop.registration", "com.dylansmusicshop.login"})
+@ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration", "com.dylansmusicshop.security"} )
+@ServletComponentScan({"com.dylansmusicshop.registration",  "com.dylansmusicshop.login"})
 
 public class MusicShopApplication {
 

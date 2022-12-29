@@ -32,8 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/guest*").anonymous()
-                .antMatchers("/login*").permitAll()
+                .antMatchers("/guest**").anonymous()
+               .antMatchers("/login**").permitAll()
                 .anyRequest()
                 .authenticated()
 
@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID");
-
 
     }
 
