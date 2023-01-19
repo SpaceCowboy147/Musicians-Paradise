@@ -1,6 +1,8 @@
 package com.dylansmusicshop.registration;
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,13 +27,14 @@ public class registerServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String matchingPassword = request.getParameter("password_confirmation");
-
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            passwordEncoder.encode(password);
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
 
             PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, role, password, address, email) values(?,?,?,?,?)");
             registerUser.setString(1, userName);
             registerUser.setString(2, "user");
-            registerUser.setString(3, password);
+            registerUser.setString(3, String.valueOf(passwordEncoder));
             registerUser.setString(4, "123 street, Statesota");
             registerUser.setString(5, email);
             registerUser.executeUpdate();
