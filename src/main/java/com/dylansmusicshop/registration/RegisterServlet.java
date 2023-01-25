@@ -14,41 +14,47 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-@WebServlet("/registrationServlet")
-public class registerServlet extends HttpServlet {
 
+@WebServlet("/registrationServlet")
+public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         try {
             response.setContentType("text/html");
 
-            String userName = request.getParameter("username");
-            String email = request.getParameter("email");
+            String  username = request.getParameter("username");
+            String  email = request.getParameter("email");
             String password = request.getParameter("password");
             String matchingPassword = request.getParameter("password_confirmation");
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-            passwordEncoder.encode(password);
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
 
-            PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, role, password, address, email) values(?,?,?,?,?)");
-            registerUser.setString(1, userName);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            System.out.println(username + email + password);
+
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
+            PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, authorities, password, address, email) values(?,?,?,?,?)");
+            registerUser.setString(1, username);
             registerUser.setString(2, "user");
-            registerUser.setString(3, String.valueOf(passwordEncoder));
-            registerUser.setString(4, "123 street, Statesota");
+            registerUser.setString(3, passwordEncoder.encode(password));
+            registerUser.setString(4, " ");
             registerUser.setString(5, email);
             registerUser.executeUpdate();
-           connection.close();
+            connection.close();
             PrintWriter out = response.getWriter();
             out.println("<html><body><b>Successfully inserted"
-                    + "</b></body></html>");
-
+                    + "</b></body></html>\n" +
+                    "<div class=\"topCushion\">Continue to login <a href=\"login\">Continue</a></div>");
         } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+           e.printStackTrace();
+           System.out.println(e);
         }
 
     }
+    }
+
+
 
 

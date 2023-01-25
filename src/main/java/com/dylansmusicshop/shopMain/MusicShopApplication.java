@@ -7,13 +7,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration", "com.dylansmusicshop.security"} )
-@ServletComponentScan({"com.dylansmusicshop.registration",  "com.dylansmusicshop.login"})
+@ServletComponentScan({"com.dylansmusicshop.registration", "com.dylansmusicshop.login"})
 
 public class MusicShopApplication {
 

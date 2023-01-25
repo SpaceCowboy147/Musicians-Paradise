@@ -3,7 +3,7 @@ package com.dylansmusicshop.login;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class loginDTO {
+public class LoginDTO {
     @NotNull
     @NotEmpty
     private String username;
