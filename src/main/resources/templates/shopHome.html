@@ -12,16 +12,85 @@
     background-color: #3e3e3e;
     color: white;
     }
+       /* navBar start*/
+.navBar {
+         list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+          border: 2px solid black;
+    }
+
+li {
+  float: left;
+}
+
+li a {
+        display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+    }
+
+
+li a:hover {
+  background-color: #111;
+}
+
+.contactMe {
+    background-color: black;
+}
+ /* navBar End */
+
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
     
 	</style>
 </head>
 <body>
 
-<h1>Main Menu</h1>
-<p>Products</p>
-<p>Cart</p>
-<p>Order History<p>
-<p>Account</p>
+<h1>Musicians Paradise</h1>
+<ul class = "navBar">
+    <li><a href = "/shopHome">Home</a></li>
+    <li class="dropdown">
+        <a href = "products">Products</a></li>
+    <a href="products" class="dropbtn">Products</a>
+    <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+        </li>
+    <li><a href = "Order History">Order History</a></li>
+    <li><a href = "Account">Account</a></li>
+</ul>
       <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </form>
