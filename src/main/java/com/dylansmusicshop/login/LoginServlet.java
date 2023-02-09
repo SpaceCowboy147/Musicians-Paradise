@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
             System.out.println("userName" + ": " + userName + " " + "password" + ": " + password);
 
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+           // BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
             PreparedStatement validUser = connection.prepareStatement("SELECT username FROM users WHERE username=? AND password=?");
             validUser.setString(1, userName);

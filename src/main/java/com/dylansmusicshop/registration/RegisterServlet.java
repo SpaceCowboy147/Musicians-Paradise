@@ -34,12 +34,13 @@ public class RegisterServlet extends HttpServlet {
 
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
-            PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, authorities, password, address, email) values(?,?,?,?,?)");
+            PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, authorities, password, address, email, enabled) values(?,?,?,?,?,?)");
             registerUser.setString(1, username);
             registerUser.setString(2, "user");
             registerUser.setString(3, passwordEncoder.encode(password));
             registerUser.setString(4, " ");
             registerUser.setString(5, email);
+            registerUser.setInt(6, 1);
             registerUser.executeUpdate();
             connection.close();
             PrintWriter out = response.getWriter();

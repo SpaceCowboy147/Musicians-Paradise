@@ -1,6 +1,7 @@
 package com.dylansmusicshop.security;
 
 
+import com.dylansmusicshop.login.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
@@ -19,51 +22,50 @@ import javax.sql.DataSource;
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-
-    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-           auth.jdbcAuthentication()
-                   .dataSource(dataSource)
-                   .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                   .authoritiesByUsernameQuery("select username, authorities from users where username=?")
-                   .passwordEncoder(passwordEncoder());
+//           auth.jdbcAuthentication()
+//                   .passwordEncoder(new BCryptPasswordEncoder())
+//                   .dataSource(dataSource)
+//                   .usersByUsernameQuery("select username, password, enabled from users where username=?")
+//                   .authoritiesByUsernameQuery("select username, authorities from users where username=?");
+
+        //USING in memory because I keep getting an error saying my passwords aren't BCrypt. Had to follow youtube tutorial and still got the same error.
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        auth.inMemoryAuthentication()
+                .withUser("user").password(encoder.encode("test"))
+                .roles("user");
     }
+
+
 
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-http.authorizeRequests()
-        .anyRequest()
-        .authenticated()
-        .and()
+
+                http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("user")
+                .antMatchers("/guest**").anonymous()
 
 
-        //        http.csrf().disable()
-             //   .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasRole("user")
-//                .antMatchers("/guest**").anonymous()
-//                        .antMatchers("/registrationServlet").hasRole("user")
-//
-//                        //.antMatchers("/shopHome").//shophome and registration are permit all until form login works
-//                     //   .antMatchers("/registration").permitAll()
-//                        .antMatchers("/login").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//
-//                .and()
+                        .antMatchers("/shopHome").hasRole("user")//shophome and registration are permit all until form login works
+                        .antMatchers("/registration").permitAll()
+                        .antMatchers("/registrationServlet").permitAll()
+                        .antMatchers("/login").permitAll()
+                .anyRequest()
+                .authenticated()
+
+               .and()
                 .formLogin()
-//                .loginPage("/login")
-//                        .loginProcessingUrl("/loginServlet")
-//                .defaultSuccessUrl("/shopHome", true)
-//                .failureUrl("/login-error")
+                .loginPage("/login")
+                        .loginProcessingUrl("/loginServlet")
+                .defaultSuccessUrl("/shopHome", true)
+                .failureUrl("/login-error")
 
 
                 .and()

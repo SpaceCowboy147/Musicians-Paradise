@@ -22,7 +22,7 @@ class registerServletTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("username")).thenReturn("user");
-        when(request.getParameter("password")).thenReturn("pass");
+        when(request.getParameter("password")).thenReturn("147");
         when(request.getParameter("email")).thenReturn("email@yahoo.com");
         new RegisterServlet().doPost(request, response);
         verify(request, atLeast(1)).getParameter("username");

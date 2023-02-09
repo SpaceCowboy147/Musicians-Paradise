@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration", "com.dylansmusicshop.security"} )
-@ServletComponentScan(basePackages = {"com.dylansmusicshop.registration", "com.dylansmusicshop.login"})
+@ServletComponentScan({"com.dylansmusicshop.registration", "com.dylansmusicshop.login"})
 
 public class MusicShopApplication {
 
