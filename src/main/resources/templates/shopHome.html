@@ -22,11 +22,11 @@
           border: 2px solid black;
     }
 
-li {
+.navBar a {
   float: left;
 }
 
-li a  {
+.navBar a  {
         display: block;
   color: white;
   text-align: center;
@@ -35,7 +35,7 @@ li a  {
     }
 
 
-li a:hover {
+ a:hover {
   background-color: #111;
 }
 
@@ -44,42 +44,83 @@ li a:hover {
 }
  /* navBar End */
 
-.navBar ul li {
-	display:inline-block;
-	background-color: #E64A19;
-	}
- .navBar a {
-	display:block;
-	padding:0 10px;
-	color:#FFF;
-	font-size:20px;
-	line-height: 60px;
-	text-decoration:none;
+
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
-nav a:hover {
-	background-color: rgba(0, 0, 0, 0.4);
-    color: #fff;
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+
 }
+ .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
 	</style>
 </head>
 <body>
 
 <h1>Musicians Paradise</h1>
-<ul class = "navBar">
-    <li><a href = "/shopHome">Home</a></li>
+<div class = "navBar">
+    <a href = "/shopHome">Home</a>
 
-    <li><a href = "products" class="dropdown">Products</a></li>
-    < class="productDropdown">
-    <li><a href="#">Guitars</a></li>
-    <li> <a href="#">Drums</a></li>
-    <li>  <a href="#">Accessories</a></li>
+    <div class="dropdown">
+        <button class="dropbtn">Products
+        </button>
+        <div class="dropdown-content">
+        <a href="#">Guitars</a>
+        <a href="#">Drums</a>
+        <a href="#">Accessories</a>
+    </div>
+    </div>
+        <a href = "Order History">Order History</a>
+        <a href = "Cart">Cart</a>
+        <a href = "Account">Account</a>
+
+</div>
 
 
-
-
-    <li><a href = "Order History">Order History</a></li>
-    <li><a href = "Account">Account</a></li>
-</ul>
       <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </form>

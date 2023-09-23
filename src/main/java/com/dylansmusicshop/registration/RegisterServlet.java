@@ -30,8 +30,6 @@ public class RegisterServlet extends HttpServlet {
             String matchingPassword = request.getParameter("password_confirmation");
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-            System.out.println(username + email + password);
-
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
             PreparedStatement registerUser = connection.prepareStatement("INSERT into users(username, authorities, password, address, email, enabled) values(?,?,?,?,?,?)");
