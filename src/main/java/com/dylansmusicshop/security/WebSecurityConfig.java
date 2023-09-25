@@ -35,15 +35,15 @@ private DataSource dataSource;
 
                 http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("admin")
+                .antMatchers("/user/**").hasRole("user")
                 .antMatchers("/guest/**").anonymous()
                         .antMatchers("/shopHome").permitAll()
                         .antMatchers("/registration").permitAll()
                         .antMatchers("/registrationServlet").permitAll()
                         .antMatchers("/login").permitAll()
                         .antMatchers("/loginServlet").permitAll()
-                        .antMatchers("/admin/edit").hasAuthority("ADMIN")
+                        .antMatchers("/admin").hasAuthority("admin")
 
 
                 .anyRequest()
@@ -53,7 +53,7 @@ private DataSource dataSource;
                 .formLogin()
                 .loginPage("/login")
                         .loginProcessingUrl("/loginServlet")
-                .defaultSuccessUrl("/shopHome", true)
+                .defaultSuccessUrl("/shopHome", false)
                 .failureUrl("/login-error")
 
 

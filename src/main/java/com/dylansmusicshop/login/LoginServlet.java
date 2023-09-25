@@ -1,5 +1,6 @@
 package com.dylansmusicshop.login;
 
+import com.dylansmusicshop.users.JdbcUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,8 +18,10 @@ import java.sql.*;
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
 
+    private JdbcUser jdbcUser;
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
-GrantedAuthority authority;
+
         try {
 
             response.setContentType("text/html");
@@ -29,28 +32,28 @@ GrantedAuthority authority;
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
 
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicshop", "root", "1234");
-            PreparedStatement validUser = connection.prepareStatement("SELECT password FROM users WHERE username=?");
-            validUser.setString(1, userName);
-            validUser.setString(2, password );
-            ResultSet userInput = validUser.executeQuery();
-            if (userInput.next()) {
-                String hashedPasswordFromDB = userInput.getString("password");
+
+            ResultSet userInput = (ResultSet) jdbcUser.findByUsername(userName);
+            String hashedPasswordFromDB = userInput.getString("password");
+            String authority = userInput.getString("authorities");
 
 
                 boolean passwordMatches = bCryptPasswordEncoder.matches(password, hashedPasswordFromDB);
-                if (passwordMatches) {
-                    userInput.next();
-                    connection.close();
+                if (passwordMatches && authority.equals("user")) {
+//                    userInput.next();
+//                    connection.close();
                     response.sendRedirect("/shopHome");
-                    response.wait(3000);
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/shopHome");
+
+                } else if (passwordMatches && authority.equals("admin")) {
+                    response.sendRedirect("/admin");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin");
                     requestDispatcher.forward(request, response);
                 }
 
-            }
 
-        } catch (ServletException | IOException | SQLException | InterruptedException e) {
+
+
+        } catch (ServletException | IOException | SQLException e) {
             throw new RuntimeException(e);
         }
     }

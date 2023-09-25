@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
         return "shopHome";
     }
 
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin";
+    }
+
     @GetMapping("/login-error")
     public String loginErrorPage() {
         return "Incorrect username or password";
