@@ -35,13 +35,13 @@ import java.util.List;
 
         @Override
         public void save(User user) {
-            String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-            jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
+            String sql = "INSERT INTO users (username, password, email, authorities) VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getAuthorities());
         }
 
         @Override
         public void update(User user) {
-            String sql = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+            String sql = "UPDATE users SET username = ?, password = ? email = ? WHERE id = ?";
             jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getID());
         }
 
