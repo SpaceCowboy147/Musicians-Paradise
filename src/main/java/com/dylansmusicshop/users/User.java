@@ -9,6 +9,8 @@ public class User {
     private String email;
     private String authorities;
 
+    private boolean enabled;
+
     public long getID() {
         return  id;
     }
@@ -37,6 +39,10 @@ public class User {
     }
 
     public String getAuthorities() { return authorities; }
-    public String setAuthorities(String authority) { return authority; }
+    public void setAuthorities(String authority) { this.authorities = authority;
+    }
+    public boolean getEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled;
+    }
 
 }

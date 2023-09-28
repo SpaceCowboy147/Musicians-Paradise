@@ -1,6 +1,7 @@
 package com.dylansmusicshop.users;
 
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -9,25 +10,31 @@ import java.util.List;
 @Repository
     public class JdbcUser implements UserRepo {
 
-        private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-        public JdbcUser(JdbcTemplate jdbcTemplate) {
-            this.jdbcTemplate = jdbcTemplate;
+    public JdbcUser(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public User findByID(Long id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new UserRowMapper());
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        try {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{username}, new UserRowMapper());
+    } catch(
+    EmptyResultDataAccessException e) {
+            return null;
         }
+    }
 
-        @Override
-        public User findByID(Long id) {
-            String sql = "SELECT * FROM users WHERE id = ?";
-            return jdbcTemplate.queryForObject(sql, new Object[]{id}, new UserRowMapper());
-        }
 
-        @Override
-        public User findByUsername(String username) {
-            String sql = "SELECT * FROM users WHERE username = ?";
-            return jdbcTemplate.queryForObject(sql, new Object[]{username}, new UserRowMapper());
-        }
-
-        @Override
+@Override
         public List<User> findAll() {
             String sql = "SELECT * FROM users";
             return jdbcTemplate.query(sql, new UserRowMapper());
@@ -35,8 +42,8 @@ import java.util.List;
 
         @Override
         public void save(User user) {
-            String sql = "INSERT INTO users (username, password, email, authorities) VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getAuthorities());
+            String sql = "INSERT INTO users (username, password, email, authorities, enabled) VALUES (?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getAuthorities(), user.getEnabled());
         }
 
         @Override

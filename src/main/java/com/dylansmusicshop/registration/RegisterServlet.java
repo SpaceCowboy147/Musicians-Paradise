@@ -26,8 +26,8 @@ public class RegisterServlet extends HttpServlet {
 
             response.setContentType("text/html");
 
-            String  username = request.getParameter("username");
-            String  email = request.getParameter("email");
+            String username = request.getParameter("username");
+            String email = request.getParameter("email");
             String password = request.getParameter("password");
             String matchingPassword = request.getParameter("password_confirmation");
 
@@ -46,6 +46,7 @@ public class RegisterServlet extends HttpServlet {
                 user.setPassword(passwordEncoder.encode(password));
                 user.setEmail(email);
                 user.setAuthorities("user");
+                user.setEnabled(true);
                 userRepository.save(user);
 
                 PrintWriter out = response.getWriter();
