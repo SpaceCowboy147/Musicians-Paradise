@@ -1,7 +1,5 @@
 package com.dylansmusicshop.products;
 
-import java.util.Scanner;
-
 public class Products {
 
     private int id;
@@ -39,14 +37,14 @@ public class Products {
         this.brand = brand;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public double getPrice() {
+        return price;
     }
 
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
 
-        this.brand = price;
+        this.price = price;
     }
 
 

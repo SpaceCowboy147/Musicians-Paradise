@@ -1,11 +1,8 @@
 package com.dylansmusicshop.products;
 
-import com.dylansmusicshop.users.User;
-import com.dylansmusicshop.users.UserRowMapper;
-
 import java.util.List;
 
-public interface productsRepo {
+public interface ProductsRepo {
 
      Products findProductByID(int id);
 
@@ -13,5 +10,5 @@ public interface productsRepo {
 
     public List<Products> findAllProducts();
 
-
+    Products findByProductType();
 }

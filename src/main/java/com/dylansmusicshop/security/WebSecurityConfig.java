@@ -33,16 +33,19 @@ private DataSource dataSource;
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
+
                 http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("admin")
+              //  .antMatchers("/admin/**").hasRole("admin")
                 .antMatchers("/user/**").hasRole("user")
                 .antMatchers("/guest/**").anonymous()
                         .antMatchers("/shopHome").permitAll()
+                        .antMatchers("/products").permitAll()
                         .antMatchers("/registration").permitAll()
                         .antMatchers("/registrationServlet").permitAll()
                         .antMatchers("/login").permitAll()
                         .antMatchers("/loginServlet").permitAll()
+
                         .antMatchers("/admin").hasAuthority("admin")
 
 
@@ -53,7 +56,7 @@ private DataSource dataSource;
                 .formLogin()
                 .loginPage("/login")
                         .loginProcessingUrl("/loginServlet")
-                .defaultSuccessUrl("/shopHome", false)
+                .defaultSuccessUrl("/shopHome", true)
                 .failureUrl("/login-error")
 
 

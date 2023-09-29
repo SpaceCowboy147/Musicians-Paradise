@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
 
-  @Autowired
-  private UserRepo userRepository;
+
   @GetMapping("/registration")
   public String showRegistrationForm() {
 
