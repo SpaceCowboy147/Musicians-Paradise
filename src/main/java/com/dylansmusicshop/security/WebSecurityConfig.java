@@ -36,7 +36,7 @@ private DataSource dataSource;
 
                 http.csrf().disable()
                 .authorizeRequests()
-              //  .antMatchers("/admin/**").hasRole("admin")
+              //.antMatchers("/admin/**").hasRole("admin")
                 .antMatchers("/user/**").hasRole("user")
                 .antMatchers("/guest/**").anonymous()
                         .antMatchers("/shopHome").permitAll()
@@ -45,7 +45,6 @@ private DataSource dataSource;
                         .antMatchers("/registrationServlet").permitAll()
                         .antMatchers("/login").permitAll()
                         .antMatchers("/loginServlet").permitAll()
-
                         .antMatchers("/admin").hasAuthority("admin")
 
 
@@ -56,7 +55,7 @@ private DataSource dataSource;
                 .formLogin()
                 .loginPage("/login")
                         .loginProcessingUrl("/loginServlet")
-                .defaultSuccessUrl("/shopHome", true)
+                .defaultSuccessUrl("/dashboard", true)
                 .failureUrl("/login-error")
 
 
