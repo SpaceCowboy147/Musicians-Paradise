@@ -120,10 +120,42 @@
 
 </div>
 
+<label for="guitars">Choose a guitar:</label>
+<select name="guitars" id="guitars">
+    <optgroup label="Fender">
+        <option value="Stratocaster">Stratocaster</option>
+        <option value="Telecaster">Telecaster</option>
+    </optgroup>
+    <optgroup label="Gibson">
+        <option value="Les Paul">Les Paul</option>
+        <option value="SG">SG</option>
+    </optgroup>
+</select>
 
+<label for="color">Choose a color:</label>
+<select name="color" id="color">
+        <option value="green">green</option>
+        <option value="purple">purple</option>
+        <option value="black">black</option>
+        <option value="white">white</option>
+        <option value="tobacco sunburst">tobacco sunburst</option>
+</select>
+
+<label for="quantity">Quantity</label>
+    <input type="number" id="quantity" name="quantity" min =1></input>
+
+<form action ="/addToCart" method="post">
+<button>Add to cart</button>
+</form>
+
+
+<a href="/products">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Products</button>
+</a>
       <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </form>
+
 
 </body>
 </html>

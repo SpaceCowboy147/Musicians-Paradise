@@ -8,7 +8,7 @@ public class Products {
     private String model;
     private double price;
 
-    public long getID() {
+    public int getID() {
         return  id;
     }
     public void setID(int id) {
@@ -29,7 +29,7 @@ public class Products {
 
         this.model = model;
     }
-    public String getBrand() {
+    public String getBrand(String productName) {
         return brand;
     }
     public void setBrand(String brand) {
@@ -37,8 +37,8 @@ public class Products {
         this.brand = brand;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPrice(double price) {
+        return this.price;
     }
 
 
