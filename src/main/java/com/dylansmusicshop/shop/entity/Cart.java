@@ -17,8 +17,4 @@ public class Cart {
 
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
 }

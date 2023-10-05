@@ -1,6 +1,6 @@
 package com.dylansmusicshop.shop.repositories;
 
-import com.dylansmusicshop.shop.entity.Cart;
+import com.dylansmusicshop.shop.entity.CartItem;
 import org.springframework.stereotype.Repository;
 
 
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CartRepo {
 
 
-   Cart showItemsInCart();
+   CartItem showItemsInCart();
 
 }

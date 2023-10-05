@@ -11,4 +11,8 @@ public interface ProductsRepo {
     public List<Products> findAllProducts();
 
     Products findByProductType();
-}
+
+    int findProductIDByName(String productName);
+
+    double getProductPrice(double price);
+   }

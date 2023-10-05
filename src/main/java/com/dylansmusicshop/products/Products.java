@@ -8,6 +8,7 @@ public class Products {
     private String model;
     private double price;
 
+
     public int getID() {
         return  id;
     }
@@ -37,7 +38,7 @@ public class Products {
         this.brand = brand;
     }
 
-    public double getPrice(double price) {
+    public double getPrice() {
         return this.price;
     }
 
@@ -46,6 +47,7 @@ public class Products {
 
         this.price = price;
     }
+
 
 
 }

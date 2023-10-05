@@ -8,5 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface CartItemRepo {
 
 
-    CartItem addToCart();
+    CartItem addToCart(CartItem cartItem);
+
+    CartItem showCart();
 }
+

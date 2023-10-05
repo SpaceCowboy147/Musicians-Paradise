@@ -7,7 +7,8 @@ import java.util.List;
 
 @Repository
 public class JdbcProducts implements ProductsRepo {
-   private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
     public JdbcProducts(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -16,7 +17,7 @@ public class JdbcProducts implements ProductsRepo {
     @Override
     public Products findProductByID(int id) {
         String sql = "SELECT * from products where id = ?";
-        return (Products) jdbcTemplate.query(sql,new Object[]{id}, new ProductRowMapper());
+        return (Products) jdbcTemplate.query(sql, new Object[]{id}, new ProductRowMapper());
     }
 
     @Override
@@ -37,6 +38,20 @@ public class JdbcProducts implements ProductsRepo {
         return (Products) jdbcTemplate.query(sql, new ProductRowMapper());
     }
 
+    @Override
+    public int findProductIDByName(String productName) {
+        String sql = "SELECT id from products where model = ?";
+        Integer productId = jdbcTemplate.queryForObject(sql, new Object[]{productName}, Integer.class);
+        return productId != null ? productId : 0;
+    }
 
+    @Override
+    public double getProductPrice(double price) {
+        String sql = "SELECT price FROM products where model = ?";
+        Double productPrice = jdbcTemplate.queryForObject(sql, new Object[]{price}, Double.class);
+        return productPrice != null ? productPrice : 0;
+    }
 }
+
+
 
