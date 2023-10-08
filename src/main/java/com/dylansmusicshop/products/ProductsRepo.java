@@ -14,5 +14,5 @@ public interface ProductsRepo {
 
     int findProductIDByName(String productName);
 
-    double getProductPrice(double price);
+    double getProductPrice(String modelName);
    }

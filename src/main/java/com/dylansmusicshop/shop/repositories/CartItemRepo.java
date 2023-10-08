@@ -1,15 +1,19 @@
 package com.dylansmusicshop.shop.repositories;
 
 import com.dylansmusicshop.shop.entity.CartItem;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface CartItemRepo {
 
+    List<String> FindModelByID(int id);
 
     CartItem addToCart(CartItem cartItem);
 
-    CartItem showCart();
+    List<CartItem> showCart();
+
+    int deleteFromCart(String modelName);
 }
 

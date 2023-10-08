@@ -19,28 +19,43 @@ public class ShopControllers {
 
 
     @Autowired
-private JdbcProducts jdbcProducts;
-    private  ProductsRepo productRepository;
+    private JdbcProducts jdbcProducts;
 
-    private  CartItemRepo cartItemRepository;
+    private ProductsRepo productRepository;
+
+    private final CartItemRepo cartItemRepository;
+    @Autowired
+    public ShopControllers(CartItemRepo cartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
+    }
 @Autowired
     private CartItemService cartItemService;
     JdbcTemplate jdbcTemplate;
-
-
 
 
     @GetMapping("/products")
     @ResponseBody
     public List<Products> productsPage() {
         return jdbcProducts.findAllProducts();
+
     }
 
-    @GetMapping("/cart")
+
+    @GetMapping("/Cart")
     @ResponseBody
-    public List<CartItem> showCart() {
-        return (List<CartItem>) cartItemService.showCart();
-    }
+    public String showCart() {
+     List<CartItem> cartItems = cartItemRepository.showCart();
+           StringBuilder htmlDeleteItems = new StringBuilder("<table border='5'>");
+           for (CartItem cartItem : cartItems) {
+               htmlDeleteItems.append("<tr>");
+               htmlDeleteItems.append("<tr>");
+               htmlDeleteItems.append("<td>").append(cartItemService.FindModelByID(cartItem.getProductId())).append("</td>");
+               htmlDeleteItems.append("<td>").append(cartItem.getPrice()).append("<button>delete</button></td>");
+               htmlDeleteItems.append("</tr>");
+           }
+                return htmlDeleteItems.toString();
+           }
+
 
     @PostMapping("/addToCart")
     @ResponseBody
@@ -48,18 +63,20 @@ private JdbcProducts jdbcProducts;
                             @RequestParam("color") String color,
                             @RequestParam("quantity") int quantity) {
 //
-        Products products = new Products();
+                Products products = new Products();
+                int productId = jdbcProducts.findProductIDByName(productName);
+                products.setID(productId);
+                products.setColor(color);
 
-       products.setID(jdbcProducts.findProductIDByName(productName));
-        products.setColor(color);
-        CartItem cartItem = new CartItem();
-        cartItem.setProductId(products.getID());
-        cartItem.setPrice(products.getPrice());
-        cartItem.setCart_id(19); //test
-        cartItem.setQuantity(quantity);
+                CartItem cartItem = new CartItem();
+                double itemPrice = jdbcProducts.getProductPrice(productName);
+                cartItem.setProductId(products.getID());
+                cartItem.setCart_id(1);
+                cartItem.setPrice(itemPrice);
+                cartItem.setQuantity(quantity);
+                cartItemService.addToCart(cartItem);
 
-        cartItemService.addToCart(cartItem);
-return  "Added to cart";
+                return  "Added to cart";
     }
 
     @GetMapping("/account")

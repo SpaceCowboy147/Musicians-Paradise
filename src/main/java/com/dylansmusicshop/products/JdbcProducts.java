@@ -46,9 +46,9 @@ public class JdbcProducts implements ProductsRepo {
     }
 
     @Override
-    public double getProductPrice(double price) {
+    public double getProductPrice(String modelName) {
         String sql = "SELECT price FROM products where model = ?";
-        Double productPrice = jdbcTemplate.queryForObject(sql, new Object[]{price}, Double.class);
+        Double productPrice = jdbcTemplate.queryForObject(sql, Double.class, modelName);
         return productPrice != null ? productPrice : 0;
     }
 }
