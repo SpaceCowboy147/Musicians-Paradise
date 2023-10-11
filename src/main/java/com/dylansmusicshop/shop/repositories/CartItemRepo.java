@@ -8,9 +8,11 @@ import java.util.List;
 @Repository
 public interface CartItemRepo {
 
-    List<String> FindModelByID(int id);
+    String FindModelByID(int productId);
 
     CartItem addToCart(CartItem cartItem);
+    public boolean isProductInCart( int productId);
+    CartItem updateCart(CartItem cartItem);
 
     List<CartItem> showCart();
 

@@ -18,10 +18,10 @@ public class CartItemService implements CartItemRepo {
 
 
     @Override
-    public List<String> FindModelByID(int id) {
-        String sql = "SELECT products.model from cart_item join products on cart_item.product_id = products.id WHERE cart_item.product_id = ?";
+    public String FindModelByID(int productId) {
+        String sql = "SELECT products.model FROM cart_item JOIN products ON cart_item.product_id = products.id  WHERE cart_item.product_id = ?";
 
-        return jdbcTemplate.queryForList(sql, String.class, id);
+        return jdbcTemplate.queryForObject(sql, String.class, productId);
     }
 
     @Override
@@ -30,6 +30,16 @@ public class CartItemService implements CartItemRepo {
         jdbcTemplate.update(sql, cartItem.getProductId(),cartItem.getCart_id(), cartItem.getPrice(), cartItem.getQuantity());
         String selectSql = "SELECT * FROM cart_item WHERE product_id = ?";
         return jdbcTemplate.queryForObject(selectSql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
+
+    }
+
+
+
+    @Override
+    public CartItem updateCart(CartItem cartItem) {
+        String sql = "UPDATE cart_item SET price = ?, quantity = ?";
+        jdbcTemplate.update(sql, cartItem.getPrice(), cartItem.getQuantity());
+        return jdbcTemplate.queryForObject(sql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
     }
 
     @Override
@@ -37,7 +47,11 @@ public class CartItemService implements CartItemRepo {
         String sql = "SELECT * FROM cart_item";
         return jdbcTemplate.query(sql, new CartItemRowMapper());
     }
-
+    public boolean isProductInCart(int productId) {
+        String sql = "SELECT COUNT(*) FROM cart_item WHERE product_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, productId);
+        return count > 0;
+    }
     @Override
     public int deleteFromCart(String modelName) {
         String sql = "DELETE FROM cart_item where model = ?";
