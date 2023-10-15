@@ -1,4 +1,4 @@
-package com.dylansmusicshop.shop.repositories;
+package com.dylansmusicshop.shop.RowMappers.repositories;
 
 import com.dylansmusicshop.shop.entity.CartItem;
 import org.springframework.stereotype.Repository;

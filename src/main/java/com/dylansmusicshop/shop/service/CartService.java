@@ -2,8 +2,7 @@ package com.dylansmusicshop.shop.service;
 
 import com.dylansmusicshop.shop.RowMappers.CartItemRowMapper;
 import com.dylansmusicshop.shop.entity.CartItem;
-import com.dylansmusicshop.shop.repositories.CartRepo;
-import com.dylansmusicshop.users.User;
+import com.dylansmusicshop.shop.RowMappers.repositories.CartRepo;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class CartService implements CartRepo {

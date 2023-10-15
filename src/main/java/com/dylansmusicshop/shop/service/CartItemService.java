@@ -2,7 +2,7 @@ package com.dylansmusicshop.shop.service;
 
 import com.dylansmusicshop.shop.RowMappers.CartItemRowMapper;
 import com.dylansmusicshop.shop.entity.CartItem;
-import com.dylansmusicshop.shop.repositories.CartItemRepo;
+import com.dylansmusicshop.shop.RowMappers.repositories.CartItemRepo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +15,7 @@ public class CartItemService implements CartItemRepo {
     public CartItemService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
 
 
     @Override
@@ -37,9 +38,9 @@ public class CartItemService implements CartItemRepo {
 
     @Override
     public CartItem updateCart(CartItem cartItem) {
-        String sql = "UPDATE cart_item SET price = ?, quantity = ?";
-        jdbcTemplate.update(sql, cartItem.getPrice(), cartItem.getQuantity());
-        return jdbcTemplate.queryForObject(sql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
+        String sql = "UPDATE cart_item SET price = price + ?, quantity = quantity + ? where product_id = ?";
+        jdbcTemplate.update(sql, cartItem.getPrice(), cartItem.getQuantity(), cartItem.getProductId());
+        return cartItem;
     }
 
     @Override
