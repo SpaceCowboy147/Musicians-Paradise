@@ -2,21 +2,27 @@ package com.dylansmusicshop.login;
 
 
 import com.dylansmusicshop.products.JdbcProducts;
+import com.dylansmusicshop.products.Products;
 import com.dylansmusicshop.users.JdbcUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
+import java.util.List;
 
 @Controller
     public class LoginPageController {
-@Autowired
-private JdbcUser jdbcUser;
+private final JdbcProducts jdbcProducts;
+
+@Autowired LoginPageController(JdbcProducts products) {
+    this.jdbcProducts = products;
+}
     @GetMapping("/login")
     public String loginPage() {
 
@@ -36,7 +42,10 @@ private JdbcUser jdbcUser;
         }
     }
     @GetMapping("/shopHome")
-    public String shopPage() {
+    public String shopPage(Model model) {
+        List<Products> products = jdbcProducts.findAllProducts();
+        model.addAttribute("shopHome", products);
+
 
         return "shopHome";
     }

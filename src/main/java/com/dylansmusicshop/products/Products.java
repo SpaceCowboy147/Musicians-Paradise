@@ -1,5 +1,8 @@
 package com.dylansmusicshop.products;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+
 public class Products {
 
     private int id;
@@ -30,7 +33,7 @@ public class Products {
 
         this.model = model;
     }
-    public String getBrand(String productName) {
+    public String getBrand() {
         return brand;
     }
     public void setBrand(String brand) {

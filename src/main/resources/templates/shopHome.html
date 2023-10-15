@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -70,7 +70,17 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+table {
+border-spacing: 20px;
+}
+.allProductsList  {
+border: 1px solid black;
 
+
+}
+td {
+margin:20px;
+}
 
 	</style>
 </head>
@@ -124,10 +134,21 @@
 <button>Add to cart</button>
 </form>
 
-
-<a href="/products">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Products</button>
-</a>
+<h1>Products</h1>
+<table>
+    <thead class = "allProductsList">
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Price</th>
+    </tr>
+<tr th:each="products : ${shopHome}">
+    <td th:text="${products.brand}"></td>
+    <td th:text="${products.model}"></td>
+    <td th:text="'$' + ${products.price}"></td>
+</tr>
+</tbody>
+</table>
       <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </form>

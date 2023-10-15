@@ -18,7 +18,7 @@ public class ShopControllers {
 
     @Autowired
     private JdbcProducts jdbcProducts;
-    
+
 
     private final CartItemRepo cartItemRepository;
 
