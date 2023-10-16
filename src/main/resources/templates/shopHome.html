@@ -81,6 +81,52 @@ border: 1px solid black;
 td {
 margin:20px;
 }
+.allProductsList {
+ display: grid;
+         grid-template-columns: repeat(3,1fr);
+        column-gap: 50px;
+         row-gap:25px;
+         }
+.product-box {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+
+.product-info {
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    margin-left: 10px;
+}
+
+.product-box {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+
+.product-info {
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    margin-left: 10px;
+
+}
+.productBoxQuantityAddToCart{
+margin-right: 15px;
+}
+
 
 	</style>
 </head>
@@ -128,27 +174,39 @@ margin:20px;
 </select>
 
 <label for="quantity">Quantity</label>
-    <input type="number" id="quantity" name="quantity" min =1></input>
+    <input type="number" id=test" name="quantity" min =1></input>
 
 
 <button>Add to cart</button>
 </form>
 
 <h1>Products</h1>
-<table>
-    <thead class = "allProductsList">
-    <tr>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Price</th>
-    </tr>
-<tr th:each="products : ${shopHome}">
-    <td th:text="${products.brand}"></td>
-    <td th:text="${products.model}"></td>
-    <td th:text="'$' + ${products.price}"></td>
-</tr>
-</tbody>
-</table>
+<form action ="/addToCart" method="post">
+<div class="allProductsList">
+    <div class="product-box" th:each="product : ${shopHome}">
+        <div class="product-info">
+            <div class="label">Brand:</div>
+            <div th:text="${product.brand}" class="value"></div>
+        </div>
+        <div class="product-info">
+            <div class="label">Model:</div>
+            <div th:text="${product.model}" class="value"></div>
+        </div>
+        <div class="product-info">
+            <div class="label">Price:</div>
+            <div th:text="'$' + ${product.price}" class="value"></div>
+            <div class = "productBoxQuantityAddToCart">
+            <label for = quantity>Quantity</label>
+            <input type="number" id="quantity" name="quantity" min =1>
+                <a href = "/addToCart">
+            <button>Add to cart</button></a></div>
+
+        </div>
+
+    </div>
+
+</div>
+</form>
       <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </form>
