@@ -2,7 +2,7 @@ package com.dylansmusicshop.shop.service;
 
 import com.dylansmusicshop.shop.RowMappers.CartItemRowMapper;
 import com.dylansmusicshop.shop.entity.CartItem;
-import com.dylansmusicshop.shop.RowMappers.repositories.CartItemRepo;
+import com.dylansmusicshop.shop.repositories.CartItemRepo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -44,9 +44,11 @@ public class CartItemService implements CartItemRepo {
     }
 
     @Override
-    public List<CartItem> showCart() {
-        String sql = "SELECT * FROM cart_item";
-        return jdbcTemplate.query(sql, new CartItemRowMapper());
+    public List<CartItem> showCart(int productId) {
+        //String sql = "SELECT * FROM cart_item";
+        String sql = "SELECT p.model, c.quantity, c.price\n" +
+                "FROM cart_item c JOIN products p ON c.product_id = ?";
+        return jdbcTemplate.query(sql, new CartItemRowMapper(), productId);
     }
     public boolean isProductInCart(int productId) {
         String sql = "SELECT COUNT(*) FROM cart_item WHERE product_id = ?";

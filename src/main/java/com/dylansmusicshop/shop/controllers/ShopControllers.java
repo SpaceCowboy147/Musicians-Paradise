@@ -2,9 +2,8 @@ package com.dylansmusicshop.shop.controllers;
 
 import com.dylansmusicshop.products.JdbcProducts;
 import com.dylansmusicshop.products.Products;
-import com.dylansmusicshop.products.ProductsRepo;
 import com.dylansmusicshop.shop.entity.CartItem;
-import com.dylansmusicshop.shop.RowMappers.repositories.CartItemRepo;
+import com.dylansmusicshop.shop.repositories.CartItemRepo;
 import com.dylansmusicshop.shop.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,28 +39,27 @@ public class ShopControllers {
     }
 
 
-    @GetMapping("/Cart")
-    @ResponseBody
-    public String showCart() {
+//    @GetMapping("/cart")
+//    public String showCart() {
 
-        List<CartItem> cartItems = cartItemRepository.showCart();
-        StringBuilder tempHTML = new StringBuilder("<table border='5'>");
-
-        for (CartItem cartItem : cartItems) { //TODO html page
-            tempHTML.append("<tr>");
-            tempHTML.append("<td>").append(cartItem.getProductId()).append("</td>");
-            tempHTML.append("<td>").append(cartItemService.FindModelByID(cartItem.getProductId())).append("</td>");
-            tempHTML.append("<td>").append(cartItem.getQuantity()).append("</td>");
-            tempHTML.append("<td>$").append(cartItem.getPrice()).append("<button>delete</button></td>");
-            tempHTML.append("</tr>");
-        }
-        return tempHTML.toString();
-    }
+//        List<CartItem> cartItems = cartItemRepository.showCart();
+//        StringBuilder tempHTML = new StringBuilder("<table border='5'>");
+//
+//        for (CartItem cartItem : cartItems) {
+//            tempHTML.append("<tr>");
+//            tempHTML.append("<td>").append(cartItem.getProductId()).append("</td>");
+//            tempHTML.append("<td>").append(cartItemService.FindModelByID(cartItem.getProductId())).append("</td>");
+//            tempHTML.append("<td>").append(cartItem.getQuantity()).append("</td>");
+//            tempHTML.append("<td>$").append(cartItem.getPrice()).append("<button>delete</button></td>");
+//            tempHTML.append("</tr>");
+//
+//        return "cart";
+//    }
 
 
     @PostMapping("/addToCart")
     @ResponseBody
-    public String addToCart(@RequestParam("guitars") String productName,
+    public String addToCart(@RequestParam("model") String productName,
                             @RequestParam("color") String color,
                             @RequestParam("quantity") int quantity) {
 
