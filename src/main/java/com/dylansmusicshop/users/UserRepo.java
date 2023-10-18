@@ -3,7 +3,7 @@ package com.dylansmusicshop.users;
 import java.util.List;
 
 public interface UserRepo {
-    User findByID(Long id);
+    User findByID(int id);
 
     User findByUsername(String username);
 
@@ -13,5 +13,5 @@ public interface UserRepo {
 
     void update(User user);
 
-    void deleteByID(Long id);
+    void deleteByID(int id);
 }

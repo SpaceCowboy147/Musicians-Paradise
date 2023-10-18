@@ -2,7 +2,7 @@ package com.dylansmusicshop.users;
 
 
 public class User {
-    private long id;
+    private int id;
     private String username;
     private String password;
 
@@ -11,10 +11,10 @@ public class User {
 
     private boolean enabled;
 
-    public long getID() {
+    public int getID() {
         return  id;
     }
-    public void setID(long id) {
+    public void setID(int id) {
         this.id = id;
     }
 

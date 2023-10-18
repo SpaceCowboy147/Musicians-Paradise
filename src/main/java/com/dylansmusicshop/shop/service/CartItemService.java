@@ -44,11 +44,14 @@ public class CartItemService implements CartItemRepo {
     }
 
     @Override
-    public List<CartItem> showCart(int productId) {
+    public List<CartItem> getAllFromCart(int userID) {
         //String sql = "SELECT * FROM cart_item";
-        String sql = "SELECT p.model, c.quantity, c.price\n" +
-                "FROM cart_item c JOIN products p ON c.product_id = ?";
-        return jdbcTemplate.query(sql, new CartItemRowMapper(), productId);
+        String sql = "SELECT p.model, c.quantity, c.price, c.id, c.product_id, c.cart_id\n" +
+                "FROM cart_item c\n" +
+                "JOIN products p ON c.product_id = p.id\n" +
+                "JOIN cart ca ON c.cart_id = ca.id\n" +
+                "WHERE ca.customer_id = ?";
+        return jdbcTemplate.query(sql, new CartItemRowMapper(), userID);
     }
     public boolean isProductInCart(int productId) {
         String sql = "SELECT COUNT(*) FROM cart_item WHERE product_id = ?";

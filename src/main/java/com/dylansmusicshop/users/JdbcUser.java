@@ -17,7 +17,7 @@ import java.util.List;
     }
 
     @Override
-    public User findByID(Long id) {
+    public User findByID(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new UserRowMapper());
     }
@@ -53,7 +53,7 @@ import java.util.List;
         }
 
         @Override
-        public void deleteByID(Long id) {
+        public void deleteByID(int id) {
             String sql = "DELETE FROM users WHERE id = ?";
             jdbcTemplate.update(sql, id);
         }

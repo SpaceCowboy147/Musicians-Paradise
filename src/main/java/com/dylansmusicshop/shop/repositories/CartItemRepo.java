@@ -14,7 +14,7 @@ public interface CartItemRepo {
     public boolean isProductInCart( int productId);
     CartItem updateCart(CartItem cartItem);
 
-    List<CartItem> showCart(int productId);
+    List<CartItem> getAllFromCart(int userID);
 
     int deleteFromCart(String modelName);
 

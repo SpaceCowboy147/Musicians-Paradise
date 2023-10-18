@@ -103,7 +103,7 @@
     </thead>
     <tbody>
     <tr th:each="product : ${cart_item}">
-<!--        <td th:text="${product.model_id}"></td>-->
+        <td th:text="${product.products.model}"></td>
         <td th:text="${product.productId}"></td>
 <!--        <td th:text="${product.color}"></td>-->
         <td th:text="${product.quantity}"></td>

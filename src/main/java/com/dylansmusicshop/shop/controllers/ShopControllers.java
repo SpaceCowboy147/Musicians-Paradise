@@ -39,24 +39,6 @@ public class ShopControllers {
     }
 
 
-//    @GetMapping("/cart")
-//    public String showCart() {
-
-//        List<CartItem> cartItems = cartItemRepository.showCart();
-//        StringBuilder tempHTML = new StringBuilder("<table border='5'>");
-//
-//        for (CartItem cartItem : cartItems) {
-//            tempHTML.append("<tr>");
-//            tempHTML.append("<td>").append(cartItem.getProductId()).append("</td>");
-//            tempHTML.append("<td>").append(cartItemService.FindModelByID(cartItem.getProductId())).append("</td>");
-//            tempHTML.append("<td>").append(cartItem.getQuantity()).append("</td>");
-//            tempHTML.append("<td>$").append(cartItem.getPrice()).append("<button>delete</button></td>");
-//            tempHTML.append("</tr>");
-//
-//        return "cart";
-//    }
-
-
     @PostMapping("/addToCart")
     @ResponseBody
     public String addToCart(@RequestParam("model") String productName,
