@@ -1,16 +1,14 @@
 package com.dylansmusicshop.login;
 
 
-import com.dylansmusicshop.products.JdbcProducts;
+import com.dylansmusicshop.products.productService;
 import com.dylansmusicshop.products.Products;
-import com.dylansmusicshop.users.JdbcUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
@@ -18,10 +16,10 @@ import java.util.List;
 
 @Controller
     public class LoginPageController {
-private final JdbcProducts jdbcProducts;
+private final productService productService;
 
-@Autowired LoginPageController(JdbcProducts products) {
-    this.jdbcProducts = products;
+@Autowired LoginPageController(productService products) {
+    this.productService = products;
 }
     @GetMapping("/login")
     public String loginPage() {
@@ -43,7 +41,7 @@ private final JdbcProducts jdbcProducts;
     }
     @GetMapping("/shopHome")
     public String shopPage(Model model) {
-        List<Products> products = jdbcProducts.findAllProducts();
+        List<Products> products = productService.findAllProducts();
         model.addAttribute("shopHome", products);
 
 

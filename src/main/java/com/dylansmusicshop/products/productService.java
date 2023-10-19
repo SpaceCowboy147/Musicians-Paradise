@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class JdbcProducts implements ProductsRepo {
+public class productService implements ProductsRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcProducts(JdbcTemplate jdbcTemplate) {
+    public productService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -17,7 +17,7 @@ public class JdbcProducts implements ProductsRepo {
     @Override
     public Products findProductByID(int id) {
         String sql = "SELECT * from products where id = ?";
-        return (Products) jdbcTemplate.query(sql, new Object[]{id}, new ProductRowMapper());
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductRowMapper());
     }
 
     @Override

@@ -94,21 +94,24 @@
 <table>
     <thead>
     <tr>
-        <th>Brand</th>
+<!--        <th>Brand</th>-->
         <th>Model:</th>
-        <th>Color:</th>
+<!--        <th>Color:</th>-->
         <th>Quantity:</th>
         <th>Price:</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product : ${cart_item}">
-        <td th:text="${product.products.model}"></td>
-        <td th:text="${product.productId}"></td>
-<!--        <td th:text="${product.color}"></td>-->
-        <td th:text="${product.quantity}"></td>
-        <td th:text="${product.price}"></td>
+    <tr th:each="entry : ${combinedList}">
+
+        <td th:text="${entry.value}"></td>
+        <td th:text="${entry.key.quantity}"></td>
+        <td th:text="'$' + ${entry.key.price}"></td>
+
+
     </tr>
+
+
     </tbody>
 </table>
 </body>

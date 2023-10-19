@@ -10,6 +10,7 @@ public class CartItemRowMapper implements RowMapper<CartItem> {
 
     @Override
     public CartItem mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+
         CartItem cartItem = new CartItem();
         cartItem.setId(resultSet.getInt("id"));
         cartItem.setProductId(resultSet.getInt("product_id")); //foreign key

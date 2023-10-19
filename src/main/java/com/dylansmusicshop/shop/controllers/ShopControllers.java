@@ -1,6 +1,6 @@
 package com.dylansmusicshop.shop.controllers;
 
-import com.dylansmusicshop.products.JdbcProducts;
+import com.dylansmusicshop.products.productService;
 import com.dylansmusicshop.products.Products;
 import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartItemRepo;
@@ -16,7 +16,7 @@ public class ShopControllers {
 
 
     @Autowired
-    private JdbcProducts jdbcProducts;
+    private productService productService;
 
 
     private final CartItemRepo cartItemRepository;
@@ -34,7 +34,7 @@ public class ShopControllers {
     @GetMapping("/products")
     @ResponseBody
     public List<Products> productsPage() {
-        return jdbcProducts.findAllProducts();
+        return productService.findAllProducts();
 
     }
 
@@ -45,11 +45,11 @@ public class ShopControllers {
                             @RequestParam("color") String color,
                             @RequestParam("quantity") int quantity) {
 
-        int productId = jdbcProducts.findProductIDByName(productName);
+        int productId = productService.findProductIDByName(productName);
         try {
             if (cartItemService.isProductInCart(productId)) {
                 CartItem cartItem = new CartItem();
-                double itemPrice = jdbcProducts.getProductPrice(productName);
+                double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
 
                 cartItem.setProductId(productId);
@@ -63,7 +63,7 @@ public class ShopControllers {
                 products.setColor(color); //TODO color implementation
 
                 CartItem cartItem = new CartItem();
-                double itemPrice = jdbcProducts.getProductPrice(productName);
+                double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
                 cartItem.setProductId(products.getID());
                 cartItem.setCart_id(1); //TODO ID based on user
