@@ -7,7 +7,7 @@ public class Products {
 
     private int id;
     private String brand;
-    private String color;
+    private int colorId;
     private String model;
     private double price;
 
@@ -19,11 +19,11 @@ public class Products {
         this.id = id;
     }
 
-    public String getColor() {
-        return color;
+    public int getColorId() {
+        return colorId;
     }
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(int colorId) {
+        this.colorId = colorId;
     }
 
     public String getModel() {

@@ -15,4 +15,6 @@ public interface ProductsRepo {
     int findProductIDByName(String productName);
 
     double getProductPrice(String modelName);
-   }
+
+    int getColorIdByColor(String color);
+}

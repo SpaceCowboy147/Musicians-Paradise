@@ -1,7 +1,6 @@
 package com.dylansmusicshop.shop.controllers;
 
-import com.dylansmusicshop.products.Products;
-import com.dylansmusicshop.products.productService;
+import com.dylansmusicshop.products.ProductService;
 import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ public class CartControllers {
     private final CartItemService cartItemService;
 
     @Autowired
-    private productService productService;
+    private ProductService productService;
 
 
     @Autowired

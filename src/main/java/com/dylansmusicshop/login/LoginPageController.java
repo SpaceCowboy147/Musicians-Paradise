@@ -1,7 +1,7 @@
 package com.dylansmusicshop.login;
 
 
-import com.dylansmusicshop.products.productService;
+import com.dylansmusicshop.products.ProductService;
 import com.dylansmusicshop.products.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @Controller
     public class LoginPageController {
-private final productService productService;
+private final ProductService productService;
 
-@Autowired LoginPageController(productService products) {
+@Autowired LoginPageController(ProductService products) {
     this.productService = products;
 }
     @GetMapping("/login")

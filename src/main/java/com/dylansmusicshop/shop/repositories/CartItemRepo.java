@@ -11,7 +11,7 @@ public interface CartItemRepo {
     String FindModelByID(int productId);
 
     CartItem addToCart(CartItem cartItem);
-    public boolean isProductInCart( int productId);
+    public boolean isProductInCart( int productId, int colorId);
     CartItem updateCart(CartItem cartItem);
 
     List<CartItem> getAllFromCart(int userID);

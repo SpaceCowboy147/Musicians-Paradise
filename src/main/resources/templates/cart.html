@@ -66,6 +66,22 @@
 }
 <!--Dropdown End-->
 
+<!--CartTable-->
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #a9a9a9;
+    }
+
 
 	</style>
 </head>
@@ -76,7 +92,7 @@
     <a href = "/shopHome">Home</a>
 
     <div class="dropdown">
-        <button class="dropbtn">Products
+        <button class="dropbtn" >Products
         </button>
         <div class="dropdown-content">
             <a href="guitars">Guitars</a>
@@ -107,10 +123,12 @@
         <td th:text="${entry.value}"></td>
         <td th:text="${entry.key.quantity}"></td>
         <td th:text="'$' + ${entry.key.price}"></td>
-
-
     </tr>
-
+    <thead>
+<tr>
+        <th class="totalPrice">Total:</th>
+</tr>
+</thead>
 
     </tbody>
 </table>

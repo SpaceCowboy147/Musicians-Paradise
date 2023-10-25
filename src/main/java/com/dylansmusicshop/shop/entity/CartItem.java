@@ -7,6 +7,8 @@ public class CartItem {
         private double price;
         private int quantity;
 
+        private int colorId;
+
         public int getId() {
             return id;
         }
@@ -45,5 +47,12 @@ public class CartItem {
         public void setQuantity(int quantity) {
             this.quantity = quantity;
         }
+    public int getColorId() {
+        return colorId;
+    }
+
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
+    }
     }
 
