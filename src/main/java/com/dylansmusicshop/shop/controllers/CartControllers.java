@@ -5,6 +5,9 @@ import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
 import com.dylansmusicshop.users.User;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,16 +42,20 @@ public class CartControllers {
         String username = principal.getName();
         User user = userService.findByUsername(username);
 
-        List<CartItem> cartProducts = cartItemService.getAllFromCart(user.getID());
-        Map<CartItem, String> combinedList = new HashMap<>();
+        List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
+      //  Map<CartItem, String> combinedList = new HashMap<>();
+        Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
 
-        for(CartItem cartItem : cartProducts) {
-            int productID = cartItem.getProductId();
-            String productModel = cartItemService.FindModelByID(productID);
-            combinedList.put(cartItem, productModel);
 
+        for(CartItem cartItem : productsInUserCart) {
+              int cartId = cartItem.getId();
+              int productId = cartItem.getProductId();
+              String modelName = cartItemService.FindModelByID(cartId);
+              String colorName = productService.getColorNameByCartId(productId);
+            combinedMap.put(cartItem, Pair.of(modelName, colorName));
+            //combinedList.put(cartItem, colorName );
         }
-        model.addAttribute("combinedList", combinedList);
+       model.addAttribute("combinedList", combinedMap);
 
             return "cart";
         }

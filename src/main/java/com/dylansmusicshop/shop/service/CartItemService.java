@@ -4,6 +4,7 @@ import com.dylansmusicshop.shop.RowMappers.CartItemRowMapper;
 import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartItemRepo;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +21,12 @@ public class CartItemService implements CartItemRepo {
 
 
 
-    @Override
-    public String FindModelByID(int productId) {
-        String sql = "SELECT products.model FROM cart_item JOIN products ON cart_item.product_id = products.id  WHERE cart_item.product_id = ?";
+        @Override
+        public String FindModelByID(int productId) {
+            String sql = "SELECT products.model FROM cart_item JOIN products ON cart_item.product_id = products.id  WHERE cart_item.id = ?";
 
-        return jdbcTemplate.queryForObject(sql, String.class, productId);
+            return jdbcTemplate.queryForObject(sql, String.class, productId);
+
     }
 
     @Override
@@ -33,25 +35,22 @@ public class CartItemService implements CartItemRepo {
         jdbcTemplate.update(sql, cartItem.getProductId(),cartItem.getCart_id(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getColorId());
         String selectSql = "SELECT * FROM cart_item WHERE product_id = ?";
         return jdbcTemplate.queryForObject(selectSql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
-
     }
-
-
-
     @Override
     public CartItem updateCart(CartItem cartItem) {
         String sql = "UPDATE cart_item SET price = price + ?, quantity = quantity + ? where product_id = ?";
-        jdbcTemplate.update(sql, cartItem.getPrice(), cartItem.getQuantity(), cartItem.getProductId(), cartItem.getColorId());
+        jdbcTemplate.update(sql, cartItem.getPrice(), cartItem.getQuantity(), cartItem.getProductId());
         return cartItem;
     }
 
     @Override
     public List<CartItem> getAllFromCart(int userID) {
-        //String sql = "SELECT * FROM cart_item";
-        String sql = "SELECT p.model, c.quantity, c.price, c.id, c.product_id, c.cart_id\n" +
+
+        String sql = "SELECT p.model, color_name, c.color_id, c.quantity, c.price, c.id, c.product_id, c.cart_id\n" +
                 "FROM cart_item c\n" +
                 "JOIN products p ON c.product_id = p.id\n" +
                 "JOIN cart ca ON c.cart_id = ca.id\n" +
+                "JOIN color co ON c.color_id = co.id\n" +
                 "WHERE ca.customer_id = ?";
         return jdbcTemplate.query(sql, new CartItemRowMapper(), userID);
     }
@@ -60,16 +59,19 @@ public class CartItemService implements CartItemRepo {
        try {
         int count = jdbcTemplate.queryForObject(sql, Integer.class, productId, colorId);
         return count > 0; }
-       catch (EmptyResultDataAccessException e) {
+       catch (EmptyResultDataAccessException e) {   //TODO theres a bug that wont add to cart if something is
+                                                     //already in cart if i dont have this.
+
            return false;
        }
 
     }
     @Override
-    public int deleteFromCart(String modelName) {
+    public int deleteFromCart(String modelName) { //TODO
         String sql = "DELETE FROM cart_item where model = ?";
         return jdbcTemplate.update(sql, modelName);
         }
+
     }
 
 

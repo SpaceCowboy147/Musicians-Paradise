@@ -82,7 +82,9 @@
         background-color: #a9a9a9;
     }
 
-
+.quantityInput {
+width: 50px;
+}
 	</style>
 </head>
 <body>
@@ -112,7 +114,7 @@
     <tr>
 <!--        <th>Brand</th>-->
         <th>Model:</th>
-<!--        <th>Color:</th>-->
+        <th>Color:</th>
         <th>Quantity:</th>
         <th>Price:</th>
     </tr>
@@ -120,9 +122,24 @@
     <tbody>
     <tr th:each="entry : ${combinedList}">
 
-        <td th:text="${entry.value}"></td>
+
+<!--        <td th:text="${entry.value}"></td>-->
+        <td th:text="${entry.value.left}"></td> <!-- Display model name -->
+        <td th:text="${entry.value.right}"></td>
+<!--       <td th:text="${entry.value}">-->
         <td th:text="${entry.key.quantity}"></td>
         <td th:text="'$' + ${entry.key.price}"></td>
+
+
+
+        <td>
+                <form method="post" action="/deleteFromCart">
+                <button>Delete</button>   </form>
+        </td>
+
+        <td><label for = quantity>Quantity</label></td>
+        <td><input type="number" class="quantityInput" id="quantity" name="quantity" min =1></td>
+
     </tr>
     <thead>
 <tr>

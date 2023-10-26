@@ -58,7 +58,16 @@ public class ProductService implements ProductsRepo {
         Integer colorId = jdbcTemplate.queryForObject(sql, Integer.class, color);
         return colorId != null ? colorId : 0;
     }
+
+    @Override
+    public String getColorNameByCartId(int productId) {
+        String sql = "select distinct c.color_name from cart_item ci\n" +
+                "join color c on ci.color_id where ci.product_id = ? limit 1";
+        return jdbcTemplate.queryForObject(sql, new Object[]{productId}, String.class);
+    }
 }
+
+
 
 
 

@@ -15,8 +15,10 @@ public class CartItemRowMapper implements RowMapper<CartItem> {
         cartItem.setId(resultSet.getInt("id"));
         cartItem.setProductId(resultSet.getInt("product_id")); //foreign key
         cartItem.setCart_id(resultSet.getInt("cart_id")); //foreign key
+        cartItem.setColorId(resultSet.getInt("color_id"));
         cartItem.setPrice(resultSet.getDouble("price"));
         cartItem.setQuantity(resultSet.getInt("quantity"));
+
         return cartItem;
     }
 }

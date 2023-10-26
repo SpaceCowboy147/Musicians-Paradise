@@ -57,11 +57,13 @@ public class ShopControllers {
                 cartItem.setPrice(priceTotal);
                 cartItem.setQuantity(quantity);
                 cartItemService.updateCart(cartItem);
+                return "Updated Cart";
+
 
             } else {
                 Products products = new Products();
                 products.setID(productId);
-                products.setColor(colorId); //TODO color implementation
+               products.setColor(colorId); //TODO fix color implementation bug
                 CartItem cartItem = new CartItem();
                 double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
