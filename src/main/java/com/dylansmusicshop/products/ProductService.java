@@ -60,10 +60,10 @@ public class ProductService implements ProductsRepo {
     }
 
     @Override
-    public String getColorNameByCartId(int productId) {
+    public String getColorNameByCartId(int cartId) {
         String sql = "select distinct c.color_name from cart_item ci\n" +
-                "join color c on ci.color_id where ci.product_id = ? limit 1";
-        return jdbcTemplate.queryForObject(sql, new Object[]{productId}, String.class);
+                "join color c on ci.color_id where ci.product_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{cartId}, String.class);
     }
 }
 

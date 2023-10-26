@@ -43,19 +43,22 @@ public class CartControllers {
         User user = userService.findByUsername(username);
 
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
-      //  Map<CartItem, String> combinedList = new HashMap<>();
-        Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
 
+        Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
+        double totalPrice = cartItemService.getTotalPrice(1); //TODO ID based on user
 
         for(CartItem cartItem : productsInUserCart) {
               int cartId = cartItem.getId();
-              int productId = cartItem.getProductId();
               String modelName = cartItemService.FindModelByID(cartId);
-              String colorName = productService.getColorNameByCartId(productId);
+              String colorName = cartItemService.getColorNameByCartId(cartId);
+
             combinedMap.put(cartItem, Pair.of(modelName, colorName));
-            //combinedList.put(cartItem, colorName );
+
         }
+
        model.addAttribute("combinedList", combinedMap);
+
+        model.addAttribute("totalPrice", totalPrice);
 
             return "cart";
         }

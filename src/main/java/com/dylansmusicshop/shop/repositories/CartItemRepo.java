@@ -16,8 +16,9 @@ public interface CartItemRepo {
 
     List<CartItem> getAllFromCart(int userID);
 
-    int deleteFromCart(String modelName);
 
+    int deleteFromCart(String modelName);
+    String getColorNameByCartId(int cartId);
 
 }
 

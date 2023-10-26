@@ -1,91 +1,105 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="registration.css" media="screen">
+
+  <style>
+     body {
+    background-color: #3e3e3e;
+    color: white;
+    }
+
+    h1 {
+    text-align: center;
+    color: black;
+    }
+
+
+     .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 20vh
+    }
+    .col-md-6 {
+  width: 48%;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+
+.input-group input.form-control {
+    font-size: 18px;
+    padding: 15px;
+    height: 50px;
+}
+
+.input-group-addon {
+    font-size: 24px; 
+    padding: 15px;
+}
+
+ .signUpForm{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 100vh
+}
+    </style>
 </head>
 
-<div id="contentContainer" class="container">
-  <div class="row">
-    <div id="realContent" class="col-xs-12">
-      <div class="row">
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0">
           <h1>Musicians Paradise</h1>
-        </div>
+
+      <div>
+            <h3>Sign up or continue as guest</h3>
       </div>
-      <div class="row">
-        <section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0">
-          <div class="well well-lg">
-            <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h3>Sign up or continue as guest</h3></div>
-                </div>
-                <div class="row">
+
+
+                  <div class="container">
+                      <!-- Registration Form -->
+                      <div class ="signUpForm">
+                          <form id="signupForm" method=post accept-charset="UTF-8" action = "registrationServlet">
+                              <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-user-secret icon-2x"></i></i></span>
+                              </div>
+                              <div class="input-group">
+                                  <input id="handle" class="form-control input-lg" placeholder="Username" maxlength="100" type="text" name="username">
+                              </div>
+                              <div class="input-group">
+                                  <input id="email" class="form-control input-lg" placeholder="Email" maxlength="100" type="email" name="email" validate>
+                              </div>
+                              <div class="input-group">
+                                  <input id="password" class="form-control input-lg" placeholder="Password" maxlength="60" type="password" name="password">
+                              </div>
+                              <div class="input-group">
+                                  <input id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" maxlength="60" type="password" name="password_confirmation">
+                              </div>
+                              <div class="form-group">
+                              </div>
+                              <div class="form-group">
+                                  <button type="submit" id="btn-signup" class="btn btn-block btn-primary btn-lg">Sign Up</button>
+                              </div>
+                          </form>
+                          <div class="form-group">
+
+                              <div class="topCushion">Already a member? <a href="login">Login</a></div>
+                              <div class="topCushion">Continue as guest? <a href="shopHome">Continue</a></div>
+                          </div>
+                      </div>
+                  </div>
+
+                      <div class="row">
                   <!-- Instructions -->
-                  <div class="col-xs-12">
+
                     <p class="lead"> <span class="text-success"></span></p>
                     <ul class="list-unstyled" style="line-height: 3; font-size: 1.4em; font-weight: 500;">
-                      <li><span class="fa fa-check text-success"></span>A wide assortment of instruments and accessories </li>
-                      <li><span class="fa fa-check text-success"></span> The best deals </li>
-                      <li><span class="fa fa-check text-success"></span> FREE shipping </li>
-                      <li><span class="fa fa-check text-success"></span> Monthly giveaways </li>
+                      <li><span ></span>A wide assortment of instruments and accessories </li>
+                      <li><span ></span> The best deals </li>
+                      <li><span ></span> FREE shipping </li>
+                      <li><span ></span> Monthly giveaways</li>
                     </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- Registration Form -->
-              <div class="col-sm-6 col-xs-12">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <form id="signupForm" method=post accept-charset="UTF-8" action = "registrationServlet">
-                      <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user-secret icon-2x"></i></i></span>
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon"><i class="icon-user icon-2x"></i></span>
-                        <input id="handle" class="form-control input-lg" placeholder="Username" maxlength="100" type="text" name="username">
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon"><i class="icon-envelope icon-2x"></i></span>
-                        <input id="email" class="form-control input-lg" placeholder="Email" maxlength="100" type="email" name="email" validate>
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon"><i class="icon-asterisk icon-2x"></i></span>
-                        <input id="password" class="form-control input-lg" placeholder="Password" maxlength="60" type="password" name="password">
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon"><i class="icon-asterisk icon-2x"></i></span>
-                        <input id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" maxlength="60" type="password" name="password_confirmation">
-                      </div>
-                      <div class="form-group">
-                        <div class="g-recaptcha" data-sitekey="6LdJRxETAAAAABZT0MUNO1r5at_-JuSGeAPTqIM6"></div>
-                      </div>
-                      <div class="form-group">
-                        <button type="submit" id="btn-signup" class="btn btn-block btn-primary btn-lg">Sign Up</button>
-                      </div>
-                    </form>
-                    <div class="form-group">
 
-                    <!--  <div class="topCushion">Already a member? <a href="login">Login</a></div>-->
-                      <div class="topCushion">Continue as guest? <a href="shopHome">Continue</a></div>
-                    </div>
-                  </div>
-                  <!-- /.col-xs-12 -->
                 </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.col-sm-6 col-xs-12 -->
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.well well-lg -->
-        </section>
-        <!-- /.col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0 -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /#realContent -->
-  </div>
-  <!-- /.row -->
-</div>
-<!-- /#contentContainer -->
+

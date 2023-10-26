@@ -126,7 +126,6 @@ width: 50px;
 <!--        <td th:text="${entry.value}"></td>-->
         <td th:text="${entry.value.left}"></td> <!-- Display model name -->
         <td th:text="${entry.value.right}"></td>
-<!--       <td th:text="${entry.value}">-->
         <td th:text="${entry.key.quantity}"></td>
         <td th:text="'$' + ${entry.key.price}"></td>
 
@@ -144,6 +143,7 @@ width: 50px;
     <thead>
 <tr>
         <th class="totalPrice">Total:</th>
+    <td><div>Total Price: $<span th:text="${totalPrice}"></span></div></td>
 </tr>
 </thead>
 

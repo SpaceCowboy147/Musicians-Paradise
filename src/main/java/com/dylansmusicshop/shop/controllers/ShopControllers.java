@@ -63,7 +63,7 @@ public class ShopControllers {
             } else {
                 Products products = new Products();
                 products.setID(productId);
-               products.setColor(colorId); //TODO fix color implementation bug
+               products.setColor(colorId);
                 CartItem cartItem = new CartItem();
                 double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
