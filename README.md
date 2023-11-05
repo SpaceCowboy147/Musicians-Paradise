@@ -1,5 +1,5 @@
 # Musicians-Paradise
-online music store including spring security.
+https://musicians-paradise.herokuapp.com/registration
 
   Online music store using Spring boot. You can create a new user and BCrypt will encrypt the password then store the details onto JawsDB mysql server. I have user and admin roles where admin can add/delete new items while user has permissions to order items.
   
