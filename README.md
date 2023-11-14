@@ -1,13 +1,26 @@
 # Musicians-Paradise
-online music store including spring security.
+https://musicians-paradise.herokuapp.com/registration
 
-Currently have a registration using a java servlet to connect to the html form, get the user input and store in a database. Still need to get the login to redirect to the main shop but I'm pretty sure I need to play with the HTML side to get it to redirect correctly. The default url after succesful login just is not working for me with the custom security. 
+  Online music store using Spring boot. You can create a new user and BCrypt will encrypt the password then store the details onto JawsDB mysql server. I have user and admin roles where admin can add/delete new items while user has permissions to order items.
+  
+  For the default user the username and password is: 
+  username: user password: 123
+  For admin login:
+  username: admin password: 123
+
+
 
 Things I'm working on:
-- hashing and salting user input passwords for obvious reasons.
-- Email validation
-- reset password
-- order/userCart implementation
--admin roles to add do some CRUD on the database. Need to keep products up to date, of course. 
+
+In stock quantity for database
+
+fix CSS and html to the registration form.
+
+delete quantity from cart
+
+order history
+
+
+
 
 
