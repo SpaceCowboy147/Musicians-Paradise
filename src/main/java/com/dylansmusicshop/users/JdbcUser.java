@@ -41,9 +41,11 @@ import java.util.List;
         }
 
         @Override
-        public void save(User user) {
+        public User save(User user) {
             String sql = "INSERT INTO users (username, password, email, authorities, enabled) VALUES (?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getAuthorities(), user.getEnabled());
+
+            return user;
         }
 
         @Override
@@ -57,5 +59,11 @@ import java.util.List;
             String sql = "DELETE FROM users WHERE id = ?";
             jdbcTemplate.update(sql, id);
         }
+
+    @Override
+    public int findUserIdByUsername(String username) {
+        String sql = "SELECT id from users where id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, username);
     }
+}
 

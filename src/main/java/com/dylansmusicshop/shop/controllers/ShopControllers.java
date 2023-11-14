@@ -4,7 +4,9 @@ import com.dylansmusicshop.products.ProductService;
 import com.dylansmusicshop.products.Products;
 import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartItemRepo;
+import com.dylansmusicshop.shop.repositories.CartRepo;
 import com.dylansmusicshop.shop.service.CartItemService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,8 @@ import java.util.List;
 @RestController
 public class ShopControllers {
 
-
+    @Autowired
+    private CartRepo cartRepo;
     @Autowired
     private ProductService productService;
 
@@ -45,9 +48,11 @@ public class ShopControllers {
                             @RequestParam("color") String color,
                             @RequestParam("quantity") int quantity) {
 
+
         int productId = productService.findProductIDByName(productName);
         int colorId = productService.getColorIdByColor(color);
         try {
+
             if (cartItemService.isProductInCart(productId, colorId)) {
                 CartItem cartItem = new CartItem();
                 double itemPrice = productService.getProductPrice(productName);

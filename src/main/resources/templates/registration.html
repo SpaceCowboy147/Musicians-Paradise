@@ -1,30 +1,32 @@
-
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <link rel="stylesheet" type="text/css" href="registration.css" media="screen">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
      body {
-    background-color: #3e3e3e;
-    color: white;
+
+     background-image: url('/images/registationPageBackground.jpg');
+     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
     }
 
     h1 {
     text-align: center;
-    color: black;
+    color: white;
     }
-
 
      .container {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center items vertically */
     align-items: center; /* Center items horizontally */
-    height: 20vh
+    height: 70vh;
     }
-    .col-md-6 {
-  width: 48%;
-    padding: 15px;
-    border: 1px solid #ccc;
+
+h3 {
+color:white;
 }
 
 
@@ -32,11 +34,14 @@
     font-size: 18px;
     padding: 15px;
     height: 50px;
+    margin-bottom: 15px;
+     background-color:  #3e3e3e;;
 }
 
 .input-group-addon {
     font-size: 24px;
     padding: 15px;
+
 }
 
  .signUpForm{
@@ -46,20 +51,33 @@
     justify-content: center; /* Center items vertically */
     align-items: center; /* Center items horizontally */
     height: 100vh
+
+
+
 }
+ .panel {
+            width: 30%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .topCushion {
+        color: white;
+
+        }
+
     </style>
 </head>
+<body>
 
           <h1>Musicians Paradise</h1>
 
-      <div>
-            <h3>Sign up or continue as guest</h3>
-      </div>
 
 
                   <div class="container">
+
+                      <div class="panel">
                       <!-- Registration Form -->
-                      <div class ="signUpForm">
+                          <div class ="signUpForm"> <h3>Sign up or continue as guest</h3>
                           <form id="signupForm" method=post accept-charset="UTF-8" action = "registrationServlet">
                               <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-user-secret icon-2x"></i></i></span>
@@ -82,6 +100,7 @@
                                   <button type="submit" id="btn-signup" class="btn btn-block btn-primary btn-lg">Sign Up</button>
                               </div>
                           </form>
+
                           <div class="form-group">
 
                               <div class="topCushion">Already a member? <a href="login">Login</a></div>
@@ -89,17 +108,18 @@
                           </div>
                       </div>
                   </div>
-
+                  </div>
                       <div class="row">
                   <!-- Instructions -->
 
-                    <p class="lead"> <span class="text-success"></span></p>
-                    <ul class="list-unstyled" style="line-height: 3; font-size: 1.4em; font-weight: 500;">
-                      <li><span ></span>A wide assortment of instruments and accessories </li>
-                      <li><span ></span> The best deals </li>
-                      <li><span ></span> FREE shipping </li>
-                      <li><span ></span> Monthly giveaways</li>
-                    </ul>
+<!--                    <p class="lead"> <span class="text-success"></span></p>-->
+<!--                    <ul class="list-unstyled" style="line-height: 3; font-size: 1.4em; font-weight: 500;">-->
+<!--                      <li><span ></span>A wide assortment of instruments and accessories </li>-->
+<!--                      <li><span ></span> The best deals </li>-->
+<!--                      <li><span ></span> FREE shipping </li>-->
+<!--                      <li><span ></span> Monthly giveaways</li>-->
+<!--                    </ul>-->
 
                 </div>
-
+</body>
+</html>

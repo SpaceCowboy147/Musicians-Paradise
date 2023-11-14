@@ -9,9 +9,12 @@ public interface UserRepo {
 
     List<User> findAll();
 
-    void save(User user);
+    User save(User user);
 
     void update(User user);
 
     void deleteByID(int id);
+
+    int findUserIdByUsername(String username);
+
 }

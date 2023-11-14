@@ -1,10 +1,14 @@
 package com.dylansmusicshop.registration;
 
 
+import com.dylansmusicshop.shop.repositories.CartRepo;
 import com.dylansmusicshop.users.User;
 import com.dylansmusicshop.users.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,12 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 @WebServlet("/registrationServlet")
 public class RegisterServlet extends HttpServlet {
     @Autowired
     private UserRepo userRepository;
+    @Autowired
+    public CartRepo cartRepo;
+    @Transactional
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
@@ -42,12 +50,17 @@ public class RegisterServlet extends HttpServlet {
             } else if  (password.equals(matchingPassword)) {
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
                 User user = new User();
+
                 user.setUsername(username);
                 user.setPassword(passwordEncoder.encode(password));
                 user.setEmail(email);
                 user.setAuthorities("user");
                 user.setEnabled(true);
-                userRepository.save(user);
+               userRepository.save(user);
+
+                if (cartRepo.UserIdExistsWithCartId(user.getID())) {
+                    cartRepo.saveUserWithCartId(user.getID());
+                }
 
                 PrintWriter out = response.getWriter();
                 out.println("<html><body><b>Successfully inserted"

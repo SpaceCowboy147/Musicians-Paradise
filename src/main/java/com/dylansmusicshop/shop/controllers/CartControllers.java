@@ -2,6 +2,7 @@ package com.dylansmusicshop.shop.controllers;
 
 import com.dylansmusicshop.products.ProductService;
 import com.dylansmusicshop.shop.entity.CartItem;
+import com.dylansmusicshop.shop.repositories.CartRepo;
 import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
 import com.dylansmusicshop.users.User;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -24,23 +26,19 @@ public class CartControllers {
     private final JdbcUser userService;
     private final CartItemService cartItemService;
 
-    @Autowired
-    private ProductService productService;
 
-
-    @Autowired
+   @Autowired
     public CartControllers(JdbcUser userService, CartItemService cartItemService) {
         this.userService = userService;
         this.cartItemService = cartItemService;
 
     }
-
-
     @GetMapping("/cart")
     public String showCart(Model model, Principal principal) {
 
         String username = principal.getName();
         User user = userService.findByUsername(username);
+
 
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
 
@@ -61,6 +59,11 @@ public class CartControllers {
         model.addAttribute("totalPrice", totalPrice);
 
             return "cart";
+        }
+    @GetMapping("/deleteFromCart")
+        public void deleteProductFromCart(RequestParam quintity ) {
+
+
         }
 
     }
