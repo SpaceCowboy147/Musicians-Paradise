@@ -6,6 +6,7 @@ import com.dylansmusicshop.shop.repositories.CartRepo;
 import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
 import com.dylansmusicshop.users.User;
+import com.dylansmusicshop.users.UserRepo;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import org.apache.commons.lang3.tuple.Pair;
@@ -30,7 +31,8 @@ public class CartControllers {
     private ProductService productService;
     @Autowired
     private CartRepo cartRepo;
-
+    @Autowired
+    private UserRepo userRepository;
    @Autowired
     public CartControllers(JdbcUser userService, CartItemService cartItemService) {
         this.userService = userService;
@@ -50,7 +52,9 @@ public class CartControllers {
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
 
         Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
-        double totalPrice = cartItemService.getTotalPrice(1); //TODO ID based on user
+        int userId = userRepository.findUserIdByUsername(username);
+       // int cartIds = cartRepo.getUserCartId(userId);
+        double totalPrice = cartItemService.getTotalPrice(cartRepo.getUserCartId(userId)); //TODO ID based on user
 
         for(CartItem cartItem : productsInUserCart) {
               int cartId = cartItem.getId();
@@ -68,7 +72,7 @@ public class CartControllers {
             return "cart";
         }
     @GetMapping("/deleteFromCart")
-        public void deleteProductFromCart(RequestParam quintity ) {
+        public void deleteProductFromCart(RequestParam quantity ) {
 
 
         }

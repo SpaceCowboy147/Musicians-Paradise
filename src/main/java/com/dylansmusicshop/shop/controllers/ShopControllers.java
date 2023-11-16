@@ -79,7 +79,13 @@ private JdbcUser userService;
                 double priceTotal = itemPrice * quantity;
                 cartItem.setProductId(products.getID());
                 cartItem.setColorId(colorId);
-                cartItem.setCart_id(userService.findUserIdByUsername(principal.getName())); //TODO ID based on user
+
+                String userName = principal.getName();
+                int userId = userService.findUserIdByUsername(userName);
+                int cartId = cartRepo.getUserCartId(userId);
+                System.out.println("Cart ID:" + cartId);
+                cartItem.setCart_id(cartId); //TODO ID based on user
+
                 cartItem.setPrice(priceTotal);
                 cartItem.setColorId(products.getColorId());
                 cartItem.setQuantity(quantity);

@@ -5,8 +5,6 @@ import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,12 +12,6 @@ public class CartService implements CartRepo {
 @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Override
-    public CartItem showItemsInCart() {
-
-        String sql = "SELECT * FROM cart_items";
-        return jdbcTemplate.queryForObject(sql, new CartItemRowMapper());
-    }
 
     @Override
     public int saveUserWithCartId(int userID) {
@@ -34,6 +26,13 @@ return jdbcTemplate.update(sql, userID);
 
         return true;
     }
+
+    @Override
+    public int getUserCartId(int userId) {
+        String sql = "SELECT id from cart where customer_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
 }
 
 

@@ -61,8 +61,8 @@ int userId = userRepository.findUserIdByUsername(username);
 
                 PrintWriter out = response.getWriter();
                 out.println("<html><body><b>Successfully inserted"
-                        + "</b></body></html>\n" +
-                        "<div class=\"topCushion\">Continue to login <a href=\"login\">Continue</a></div>");
+                        + "</b>\n" +
+                        "<div class=\"topCushion\">Continue to login <a href=\"login\">Continue</a></div></body></html>");
             } else {
                 PrintWriter out = response.getWriter();
                 out.println("<html><body><b>Passwords do not match"

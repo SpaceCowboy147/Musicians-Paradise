@@ -5,10 +5,12 @@ import com.dylansmusicshop.shop.entity.CartItem;
 
 public interface CartRepo {
 
-
-   CartItem showItemsInCart();
-
    int saveUserWithCartId(int userID);
 
    boolean UserIdExistsWithCartId(int userId);
+
+   int getUserCartId(int username);
+
+
+
 }
