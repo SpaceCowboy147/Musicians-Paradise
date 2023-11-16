@@ -26,6 +26,10 @@ public class CartControllers {
     private final JdbcUser userService;
     private final CartItemService cartItemService;
 
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CartRepo cartRepo;
 
    @Autowired
     public CartControllers(JdbcUser userService, CartItemService cartItemService) {
@@ -39,6 +43,9 @@ public class CartControllers {
         String username = principal.getName();
         User user = userService.findByUsername(username);
 
+        if (!cartRepo.UserIdExistsWithCartId(user.getID())) {
+            cartRepo.saveUserWithCartId(user.getID());
+        }
 
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
 

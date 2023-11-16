@@ -82,7 +82,7 @@ public class CartItemService implements CartItemRepo {
     }
 
     public double getTotalPrice(int cartId) {
-        String sql = " SELECT SUM(price) FROM cart_item where cart_id = ?;";
+        String sql = "SELECT SUM(price) FROM cart_item where cart_id = ?;";
         Double totalPrice = jdbcTemplate.queryForObject(sql, Double.class, cartId);
 
         return totalPrice != null ? totalPrice : 0;

@@ -6,11 +6,13 @@ import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartItemRepo;
 import com.dylansmusicshop.shop.repositories.CartRepo;
 import com.dylansmusicshop.shop.service.CartItemService;
+import com.dylansmusicshop.users.JdbcUser;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,8 @@ public class ShopControllers {
     private CartRepo cartRepo;
     @Autowired
     private ProductService productService;
-
+@Autowired
+private JdbcUser userService;
 
     private final CartItemRepo cartItemRepository;
 
@@ -46,7 +49,9 @@ public class ShopControllers {
     @ResponseBody
     public String addToCart(@RequestParam("model") String productName,
                             @RequestParam("color") String color,
-                            @RequestParam("quantity") int quantity) {
+                            @RequestParam("quantity") int quantity,
+                            Principal principal) {
+
 
 
         int productId = productService.findProductIDByName(productName);
@@ -74,7 +79,7 @@ public class ShopControllers {
                 double priceTotal = itemPrice * quantity;
                 cartItem.setProductId(products.getID());
                 cartItem.setColorId(colorId);
-                cartItem.setCart_id(1); //TODO ID based on user
+                cartItem.setCart_id(userService.findUserIdByUsername(principal.getName())); //TODO ID based on user
                 cartItem.setPrice(priceTotal);
                 cartItem.setColorId(products.getColorId());
                 cartItem.setQuantity(quantity);

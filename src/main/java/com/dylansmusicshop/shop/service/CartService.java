@@ -5,6 +5,8 @@ import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,6 +24,7 @@ public class CartService implements CartRepo {
     @Override
     public int saveUserWithCartId(int userID) {
         String sql = "INSERT into cart(customer_id) values (?)";
+
 return jdbcTemplate.update(sql, userID);
     }
 
