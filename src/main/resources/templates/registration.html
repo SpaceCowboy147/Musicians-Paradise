@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
      body {
-
      background-image: url('/images/registationPageBackground.jpg');
      background-size: cover;
     background-position: center;
@@ -60,6 +59,11 @@ color:white;
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
         }
+
+     @media (max-width: 768px) {
+    .panel {
+        width: 80%;
+    }
         .topCushion {
         color: white;
 
@@ -74,7 +78,6 @@ color:white;
 
 
                   <div class="container">
-
                       <div class="panel">
                       <!-- Registration Form -->
                           <div class ="signUpForm"> <h3>Sign up or continue as guest</h3>

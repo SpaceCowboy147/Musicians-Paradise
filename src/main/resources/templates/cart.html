@@ -85,6 +85,12 @@
 .quantityInput {
 width: 50px;
 }
+
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
 	</style>
 </head>
 <body>
@@ -135,11 +141,12 @@ width: 50px;
             <form action="/deleteFromCart" method="post">
                 <input type="hidden" name="colorId" th:value="${entry.key.colorId}" />
                 <input type="hidden" name="productId" th:value="${entry.key.productId}" />
-                <button>Delete</button>
+
 <!--        </td>-->
 
         <label for = quantity>Quantity</label>
-        <input type="number" class="quantityInput" id="quantity" name="quantity" min =1>
+        <input type="number" class="quantityInput" id="quantity" name="quantity" min =1 th:max="${entry.key.quantity}">
+                <button>Delete</button>
 </form>
     </tr>
     <thead>

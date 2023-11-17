@@ -51,7 +51,6 @@ public class CartControllers {
         }
 
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
-
         Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
 
         int userId = userRepository.findUserIdByUsername(username);
@@ -66,8 +65,7 @@ public class CartControllers {
 
         }
 
-       model.addAttribute("combinedList", combinedMap);
-
+        model.addAttribute("combinedList", combinedMap);
         model.addAttribute("totalPrice", totalPrice);
 
             return "cart";
@@ -82,12 +80,10 @@ public class CartControllers {
 
         String userName = principal.getName();
         int cartId = productService.getCartIdByUsername(userName);
-
-
         int cartItemId = cartItemService.getCartItemId(cartId, productId, colorId);
         System.out.println(cartItemId + " " + quantity);
 
-cartItemService.deleteFromCart(quantity, cartItemId);
+        cartItemService.deleteFromCart(quantity, cartItemId);
 
         }
 
