@@ -69,8 +69,19 @@ public class CartItemService implements CartItemRepo {
 
     @Override
     public int deleteFromCart(int quantity, int cartItemId) { //TODO
-        String sql = "UPDATE cart_item SET quantity = quantity - ? where id = ?;";
-        return jdbcTemplate.update(sql, quantity, cartItemId);
+
+        String sql =
+                "UPDATE cart_item\n" +
+                        "SET \n" +
+                        "    quantity = quantity - ?,\n" +
+                        "    price = price - (? * (SELECT price FROM products p WHERE p.id = cart_item.product_id))\n" +
+                        "WHERE cart_item.id = ?";
+
+//                "UPDATE cart_item SET quantity = quantity - ?\n" +
+//                    "AND price \n" +
+//                        "where id = ?;";
+
+        return jdbcTemplate.update(sql, quantity, quantity, cartItemId);
 
     }
 

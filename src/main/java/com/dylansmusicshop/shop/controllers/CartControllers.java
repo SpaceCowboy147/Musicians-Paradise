@@ -76,6 +76,7 @@ public class CartControllers {
     public void deleteProductFromCart(@RequestParam("quantity")int quantity,
                                       @RequestParam("productId") int productId,
                                       @RequestParam("colorId") int colorId,
+
                                         Principal principal) {
 
         String userName = principal.getName();
