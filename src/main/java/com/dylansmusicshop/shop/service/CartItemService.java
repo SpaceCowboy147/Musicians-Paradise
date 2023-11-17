@@ -4,12 +4,10 @@ import com.dylansmusicshop.shop.RowMappers.CartItemRowMapper;
 import com.dylansmusicshop.shop.entity.CartItem;
 import com.dylansmusicshop.shop.repositories.CartItemRepo;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class CartItemService implements CartItemRepo {
@@ -33,8 +31,8 @@ public class CartItemService implements CartItemRepo {
     public CartItem addToCart(CartItem cartItem) {
         String sql = "INSERT INTO cart_item(product_id, cart_id, price, quantity, color_id) values (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, cartItem.getProductId(), cartItem.getCart_id(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getColorId());
-        String selectSql = "SELECT * FROM cart_item WHERE product_id = ?";
-        return jdbcTemplate.queryForObject(selectSql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
+        String selectSql = "SELECT * FROM cart_item WHERE product_id = ?"; //TODO needs to be cart_item id but works without
+        return jdbcTemplate.queryForObject(sql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
     }
 
     @Override
@@ -56,8 +54,8 @@ public class CartItemService implements CartItemRepo {
         return jdbcTemplate.query(sql, new CartItemRowMapper(), userID);
     }
 
-    public boolean isProductInCart(int productId, int colorId) {
-        String sql = "SELECT id from cart_item where product_id = ? and color_id = ?";
+    public boolean isProductInCart(int productId, int colorId, int cartId) {
+        String sql = "SELECT id from cart_item where product_id = ? and color_id = ?  and cart_id = 34";
         try {
             int count = jdbcTemplate.queryForObject(sql, Integer.class, productId, colorId);
             return count > 0;
@@ -70,9 +68,10 @@ public class CartItemService implements CartItemRepo {
     }
 
     @Override
-    public int deleteFromCart(String modelName) { //TODO
-        String sql = "DELETE FROM cart_item where model = ?";
-        return jdbcTemplate.update(sql, modelName);
+    public int deleteFromCart(int quantity, int cartItemId) { //TODO
+        String sql = "UPDATE cart_item SET quantity = quantity - ? where id = ?;";
+        return jdbcTemplate.update(sql, quantity, cartItemId);
+
     }
 
     public String getColorNameByCartId(int cartId) {
@@ -87,5 +86,14 @@ public class CartItemService implements CartItemRepo {
 
         return totalPrice != null ? totalPrice : 0;
     }
+
+    @Override
+    public int getCartItemId(int cartId,int productId, int colorId) {
+        String sql = "SELECT id \n" +
+                     "FROM cart_item \n" +
+                     "WHERE  cart_id = ? AND product_id = ? AND color_id = ?;";
+        return jdbcTemplate.queryForObject(sql, Integer.class,  cartId, productId, colorId);
+    }
+
 }
 

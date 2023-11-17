@@ -7,14 +7,15 @@ import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
 import com.dylansmusicshop.users.User;
 import com.dylansmusicshop.users.UserRepo;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -26,19 +27,19 @@ public class CartControllers {
 
     private final JdbcUser userService;
     private final CartItemService cartItemService;
+    @Autowired
+    public CartControllers(JdbcUser userService, CartItemService cartItemService) {
+        this.userService = userService;
+        this.cartItemService = cartItemService;
 
+    }
     @Autowired
     private ProductService productService;
     @Autowired
     private CartRepo cartRepo;
     @Autowired
     private UserRepo userRepository;
-   @Autowired
-    public CartControllers(JdbcUser userService, CartItemService cartItemService) {
-        this.userService = userService;
-        this.cartItemService = cartItemService;
 
-    }
     @GetMapping("/cart")
     public String showCart(Model model, Principal principal) {
 
@@ -52,9 +53,9 @@ public class CartControllers {
         List<CartItem> productsInUserCart = cartItemService.getAllFromCart(user.getID());
 
         Map<CartItem, Pair<String, String>> combinedMap = new HashMap<>();
+
         int userId = userRepository.findUserIdByUsername(username);
-       // int cartIds = cartRepo.getUserCartId(userId);
-        double totalPrice = cartItemService.getTotalPrice(cartRepo.getUserCartId(userId)); //TODO ID based on user
+        double totalPrice = cartItemService.getTotalPrice(cartRepo.getUserCartId(userId));
 
         for(CartItem cartItem : productsInUserCart) {
               int cartId = cartItem.getId();
@@ -71,9 +72,22 @@ public class CartControllers {
 
             return "cart";
         }
-    @GetMapping("/deleteFromCart")
-        public void deleteProductFromCart(RequestParam quantity ) {
+    @PostMapping("/deleteFromCart")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
 
+    public void deleteProductFromCart(@RequestParam("quantity")int quantity,
+                                      @RequestParam("productId") int productId,
+                                      @RequestParam("colorId") int colorId,
+                                        Principal principal) {
+
+        String userName = principal.getName();
+        int cartId = productService.getCartIdByUsername(userName);
+
+
+        int cartItemId = cartItemService.getCartItemId(cartId, productId, colorId);
+        System.out.println(cartItemId + " " + quantity);
+
+cartItemService.deleteFromCart(quantity, cartItemId);
 
         }
 

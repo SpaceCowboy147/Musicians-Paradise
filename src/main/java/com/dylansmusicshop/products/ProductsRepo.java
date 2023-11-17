@@ -17,5 +17,7 @@ public interface ProductsRepo {
     double getProductPrice(String modelName);
 
     int getColorIdByColor(String color);
+
+    int getCartIdByUsername(String username);
    String getColorNameByCartId(int cartId);
 }

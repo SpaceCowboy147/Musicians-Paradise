@@ -52,13 +52,15 @@ private JdbcUser userService;
                             @RequestParam("quantity") int quantity,
                             Principal principal) {
 
-
-
         int productId = productService.findProductIDByName(productName);
         int colorId = productService.getColorIdByColor(color);
+        String userName = principal.getName();
+        System.out.println(userName);
+        int cartId = productService.getCartIdByUsername(userName);
+        System.out.println(cartId);
         try {
 
-            if (cartItemService.isProductInCart(productId, colorId)) {
+            if (cartItemService.isProductInCart(productId, colorId, cartId)) {
                 CartItem cartItem = new CartItem();
                 double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
@@ -80,11 +82,9 @@ private JdbcUser userService;
                 cartItem.setProductId(products.getID());
                 cartItem.setColorId(colorId);
 
-                String userName = principal.getName();
-                int userId = userService.findUserIdByUsername(userName);
-                int cartId = cartRepo.getUserCartId(userId);
+
                 System.out.println("Cart ID:" + cartId);
-                cartItem.setCart_id(cartId); //TODO ID based on user
+                cartItem.setCart_id(cartId);
 
                 cartItem.setPrice(priceTotal);
                 cartItem.setColorId(products.getColorId());

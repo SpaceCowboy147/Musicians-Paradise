@@ -11,14 +11,16 @@ public interface CartItemRepo {
     String FindModelByID(int productId);
 
     CartItem addToCart(CartItem cartItem);
-    public boolean isProductInCart( int productId, int colorId);
+    public boolean isProductInCart( int productId, int colorId, int cardId);
     CartItem updateCart(CartItem cartItem);
 
     List<CartItem> getAllFromCart(int userID);
 
 
-    int deleteFromCart(String modelName);
+    int deleteFromCart(int quantity, int cartItemId);
     String getColorNameByCartId(int cartId);
 
+
+    int getCartItemId(int userId, int productId, int colorId);
 }
 

@@ -132,13 +132,15 @@ width: 50px;
 
 
         <td>
-
+            <form action="/deleteFromCart" method="post">
+                <input type="hidden" name="colorId" th:value="${entry.key.colorId}" />
+                <input type="hidden" name="productId" th:value="${entry.key.productId}" />
                 <button>Delete</button>
-        </td>
+<!--        </td>-->
 
-        <td><label for = quantity>Quantity</label></td>
-        <td><input type="number" class="quantityInput" id="quantity" name="quantity" min =1></td>
-
+        <label for = quantity>Quantity</label>
+        <input type="number" class="quantityInput" id="quantity" name="quantity" min =1>
+</form>
     </tr>
     <thead>
 <tr>
