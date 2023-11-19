@@ -68,7 +68,7 @@ public class CartItemService implements CartItemRepo {
     }
 
     @Override
-    public int deleteFromCart(int quantity, int cartItemId) { //TODO
+    public int deleteFromCart(int quantity, int cartItemId) { //TODO delete from db once quantity is 0
 
         String sql =
                 "UPDATE cart_item\n" +

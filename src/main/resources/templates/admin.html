@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+<h2>Add new product</h2>
+
+<form action="/addProductToDataBase" method="post">
+
+    <label for="brandName">Brand name:</label>
+    <input type="text" id="brandName" name="brandName">
+
+    <label for="modelName">Model name:</label>
+    <input type="text" id="modelName" name="modelName">
+
+    <label>Product type:</label>
+
+    <select name="productType" id = "productType">Product type
+        <option value="1">Guitar</option>
+    <option value="5">Drums</option>
+    <option value="7">Accessories</option>
+    </select>
+
+    <label for="price">Product Price:</label>
+    <input type="text" id="price" name="price">
+
+    <button type="submit">Add Product</button>
+
+</form>
+</body>
+</html>

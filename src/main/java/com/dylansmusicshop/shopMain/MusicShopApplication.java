@@ -8,7 +8,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration", "com.dylansmusicshop.security", "com.dylansmusicshop.products", "com.dylansmusicshop.shop"} )
+@ComponentScan(basePackages =  {"com.dylansmusicshop.login",  "com.dylansmusicshop.users", "com.dylansmusicshop.registration", "com.dylansmusicshop.security", "com.dylansmusicshop.products", "com.dylansmusicshop.shop",
+		"com.dylansmusicshop.userAdmin"} )
 @ServletComponentScan({"com.dylansmusicshop.registration", "com.dylansmusicshop.login"})
 
 public class MusicShopApplication {

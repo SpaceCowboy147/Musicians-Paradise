@@ -36,9 +36,9 @@ private DataSource dataSource;
 
                 http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("user")
-                .antMatchers("/guest/**").anonymous()
+                .antMatchers("/admin").hasRole("admin")
+                .antMatchers("/user").hasRole("user")
+                .antMatchers("/guest").anonymous()
                         .antMatchers("/shopHome").permitAll()
                         .antMatchers("/products").permitAll()
                         .antMatchers("/registration").permitAll()
@@ -47,6 +47,7 @@ private DataSource dataSource;
                         .antMatchers("/addToCart").permitAll()
                         .antMatchers("/loginServlet").permitAll()
                         .antMatchers("/admin").hasAuthority("admin")
+                        .antMatchers("/user/**").hasRole("user")
         .antMatchers("/images/**").permitAll()
 
                 .anyRequest()

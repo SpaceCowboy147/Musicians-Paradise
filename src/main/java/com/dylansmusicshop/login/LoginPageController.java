@@ -16,11 +16,13 @@ import java.util.List;
 
 @Controller
     public class LoginPageController {
-private final ProductService productService;
+    private final ProductService productService;
 
-@Autowired LoginPageController(ProductService products) {
-    this.productService = products;
-}
+    @Autowired
+    LoginPageController(ProductService products) {
+        this.productService = products;
+    }
+
     @GetMapping("/login")
     public String loginPage() {
 
@@ -39,6 +41,9 @@ private final ProductService productService;
             throw new IllegalStateException("Unknown user role");
         }
     }
+
+
+
     @GetMapping("/shopHome")
     public String shopPage(Model model) {
         List<Products> products = productService.findAllProducts();
@@ -47,12 +52,11 @@ private final ProductService productService;
 
         return "shopHome";
     }
-
     @GetMapping("/admin")
-    @ResponseBody
-    public String adminPage() {
-        return "admin landing page";
+    public String showAdminPage(){
+        return "admin";
     }
+
 
     @GetMapping("/login-error")
     public String loginErrorPage() {
