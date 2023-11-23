@@ -8,5 +8,5 @@ public interface AdminRepository {
 
     void addProductToDataBase(String brandName ,String modelName, int productType, double price);
 
-    String deleteProductFromDataBase(int productPrimaryId);
+    void deleteProductFromDataBase(String brandName, String modelName);
 }

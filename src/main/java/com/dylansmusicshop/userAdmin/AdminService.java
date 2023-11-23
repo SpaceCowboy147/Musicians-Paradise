@@ -18,10 +18,10 @@ public class AdminService implements AdminRepository {
     }
 
     @Override
-    public String deleteProductFromDataBase(int productPrimaryId) {
-        String sql = "DELETE FROM products where id = ?";
-         jdbcTemplate.update(sql, productPrimaryId);
-         return "Successfully deleted from database";
+    public void deleteProductFromDataBase(String brandName, String modelName) {
+        String sql = "DELETE FROM products where brand = ? and model = ?";
+         jdbcTemplate.update(sql, brandName, modelName);
+
     }
 
 }

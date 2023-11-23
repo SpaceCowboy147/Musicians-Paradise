@@ -24,13 +24,15 @@ AdminRepository adminRepository;
                                      @RequestParam ("modelName") String modelName,
                                      @RequestParam ("productType") int productType,
                                      @RequestParam("price")  double price) {
-System.out.println(brandName + modelName + productType + price);
             adminRepository.addProductToDataBase(brandName, modelName, productType, price);
     }
 
     @PostMapping("/admin/deleteProduct")
-    public void deleteProductFromDataBase(Model model) {
-        List<Products> products = productService.findAllProducts();
+    public String deleteProductFromDataBase(@RequestParam("brandName") String brandName,
+                                          @RequestParam ("modelName") String modelName) {
+       adminRepository.deleteProductFromDataBase(brandName, modelName);
+
+        return "Successfully deleted from database";
 
 
 

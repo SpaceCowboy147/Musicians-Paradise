@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
@@ -30,10 +31,17 @@
 
 <h2>Delete Product</h2>
 <form action="/admin/deleteProduct" method="post">
-<select>Brand Name
-    <option>
-    </option>
-</select>
+    <div class="label">Brand:
+    <select name="brandName">
+        <option th:each="product : ${products}" th:value="${product.brand}" th:text="${product.brand}"></option>
+    </select>
+    </div>
+    <div class="label">Model:
+        <select name="modelName">
+            <option th:each="product : ${products}" th:value="${product.model}" th:text="${product.model}"></option>
+        </select>
+    </div>
+    <button type="submit">Delete</button>
 </form>
 
 

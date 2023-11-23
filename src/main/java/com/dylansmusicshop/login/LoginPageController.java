@@ -52,10 +52,11 @@ import java.util.List;
         return "shopHome";
     }
     @GetMapping("/admin")
-    public String showAdminPage(){
+    public String showAdminPage(Model model) {
+        List<Products> products = productService.findAllProducts();
+        model.addAttribute("products", products);
         return "admin";
     }
-
 
     @GetMapping("/login-error")
     public String loginErrorPage() {
