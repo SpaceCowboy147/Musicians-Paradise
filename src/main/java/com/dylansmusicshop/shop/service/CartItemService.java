@@ -31,8 +31,10 @@ public class CartItemService implements CartItemRepo {
     public CartItem addToCart(CartItem cartItem) {
         String sql = "INSERT INTO cart_item(product_id, cart_id, price, quantity, color_id) values (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, cartItem.getProductId(), cartItem.getCart_id(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getColorId());
-        String selectSql = "SELECT * FROM cart_item WHERE product_id = ?"; //TODO needs to be cart_item id but works without
-        return jdbcTemplate.queryForObject(sql, new Object[]{cartItem.getProductId()}, new CartItemRowMapper());
+        String selectSql = "SELECT * FROM cart_item WHERE id = ?";
+        return jdbcTemplate.queryForObject(selectSql,
+                new Object[]{cartItem.getId()},
+                new CartItemRowMapper());
     }
 
     @Override
@@ -59,8 +61,7 @@ public class CartItemService implements CartItemRepo {
         try {
             int count = jdbcTemplate.queryForObject(sql, Integer.class, productId, colorId);
             return count > 0;
-        } catch (EmptyResultDataAccessException e) {   //TODO theres a bug that wont add to cart if something is
-            //already in cart if i dont have this.
+        } catch (EmptyResultDataAccessException e) {
 
             return false;
         }
@@ -68,7 +69,7 @@ public class CartItemService implements CartItemRepo {
     }
 
     @Override
-    public int deleteFromCart(int quantity, int cartItemId) { //TODO delete from db once quantity is 0
+    public int deleteFromCart(int quantity, int cartItemId) {
 
         String sql =
                 "UPDATE cart_item\n" +
@@ -77,13 +78,26 @@ public class CartItemService implements CartItemRepo {
                         "    price = price - (? * (SELECT price FROM products p WHERE p.id = cart_item.product_id))\n" +
                         "WHERE cart_item.id = ?";
 
-//                "UPDATE cart_item SET quantity = quantity - ?\n" +
-//                    "AND price \n" +
-//                        "where id = ?;";
+        int rowsUpdated = jdbcTemplate.update(sql, quantity, quantity, cartItemId);
+        if (rowsUpdated > 0) {
+            int updatedQuantity = getCurrentQuantity(cartItemId);
+            if (updatedQuantity == 0) {
+                String deleteSql = "DELETE FROM cart_item WHERE id = ?";
+                jdbcTemplate.update(deleteSql, cartItemId);
+            }
+        }
 
-        return jdbcTemplate.update(sql, quantity, quantity, cartItemId);
-
+        return rowsUpdated;
     }
+
+    private int getCurrentQuantity(int cartItemId) {
+        String selectQuantitySql = "SELECT quantity FROM cart_item WHERE id = ?";
+        Integer updatedQuantity = jdbcTemplate.queryForObject(selectQuantitySql, Integer.class, cartItemId);
+        return updatedQuantity != null ? updatedQuantity : 0;
+    }
+
+
+
 
     public String getColorNameByCartId(int cartId) {
         String sql = "select c.color_name from cart_item ci\n" +

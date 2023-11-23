@@ -9,6 +9,7 @@ import com.dylansmusicshop.shop.service.CartItemService;
 import com.dylansmusicshop.users.JdbcUser;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,9 +56,8 @@ private JdbcUser userService;
         int productId = productService.findProductIDByName(productName);
         int colorId = productService.getColorIdByColor(color);
         String userName = principal.getName();
-        System.out.println(userName);
         int cartId = productService.getCartIdByUsername(userName);
-        System.out.println(cartId);
+
         try {
 
             if (cartItemService.isProductInCart(productId, colorId, cartId)) {
@@ -71,32 +71,26 @@ private JdbcUser userService;
                 cartItemService.updateCart(cartItem);
                 return "Updated Cart";
 
-
             } else {
-                Products products = new Products();
-                products.setID(productId);
-               products.setColor(colorId);
+
+
                 CartItem cartItem = new CartItem();
                 double itemPrice = productService.getProductPrice(productName);
                 double priceTotal = itemPrice * quantity;
-                cartItem.setProductId(products.getID());
+                cartItem.setProductId(productId);
                 cartItem.setColorId(colorId);
-
-
-                System.out.println("Cart ID:" + cartId);
                 cartItem.setCart_id(cartId);
-
                 cartItem.setPrice(priceTotal);
-                cartItem.setColorId(products.getColorId());
                 cartItem.setQuantity(quantity);
                 cartItemService.addToCart(cartItem);
 
             }
             return "Added to cart";
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("added to cart");
         }
+        return "Added to cart";
     }
         @GetMapping("/account")
         public String viewAccountPage () {

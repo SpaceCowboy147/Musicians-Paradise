@@ -12,7 +12,7 @@ public class AdminService implements AdminRepository {
     JdbcTemplate jdbcTemplate;
     @Override
     public void addProductToDataBase(String brandName ,String modelName, int productType, double price) {
-        String sql = "INSERT into products(brand, model, product_type, price) values (?,?,?,?)";
-        jdbcTemplate.update(sql, new ProductRowMapper());
+        String sql = "INSERT into products(brand, model, product_id, price) values (?,?,?,?)";
+        jdbcTemplate.update(sql, brandName, modelName, productType, price);
     }
 }

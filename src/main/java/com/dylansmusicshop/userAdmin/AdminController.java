@@ -17,7 +17,7 @@ AdminRepository adminRepository;
                                      @RequestParam ("modelName") String modelName,
                                      @RequestParam ("productType") int productType,
                                      @RequestParam("price")  double price) {
-
+System.out.println(brandName + modelName + productType + price);
             adminRepository.addProductToDataBase(brandName, modelName, productType, price);
     }
 }
