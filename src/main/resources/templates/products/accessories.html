@@ -1,11 +1,197 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Accessories</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>home</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+     body {
+    background-color: #3e3e3e;
+    color: white;
+    }
 
+
+
+       /* navBar start*/
+.navBar {
+         list-style-type: none;
+          margin: 0;
+          padding: 0;
+          background-color: #333;
+          border: 2px solid black;
+          }
+            .navBar a {
+             float: left;
+            }
+            .navBar a  {
+                    display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+                }
+             a:hover {
+              background-color: #111;
+            }
+            .contactMe {
+                background-color: black;
+            }
+             /* navBar End */
+
+
+    <!--dropdown start-->
+ .dropdown {
+         position: static;
+         display: inline-block;
+}
+.dropbtn {
+        background-color: #3e3e3e;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #a9a9a9;
+    min-width: 160px;
+    z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+<!--Dropdown End-->
+
+
+<!--Products table-->
+table {
+border-spacing: 20px;
+}
+.allProductsList  {
+border: 1px solid black;
+}
+td {
+margin:20px;
+}
+.allProductsList {
+ display: grid;
+         grid-template-columns: repeat(3,1fr);
+        column-gap: 50px;
+         row-gap:25px;
+         }
+         @media (max-width: 768px) {
+    .allProductsList {
+        grid-template-columns: 1fr;
+        column-gap: 20px;
+        row-gap: 15px;
+    }
+    }
+.product-box {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+.product-info {
+    margin-bottom: 10px;
+}
+.label {
+    font-weight: bold;
+}
+.value {
+    margin-left: 10px;
+}
+.product-box {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+.product-info {
+    margin-bottom: 10px;
+}
+.label {
+    font-weight: bold;
+}
+.value {
+    margin-left: 10px;
+}
+.productBoxQuantityAddToCart{
+ display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.quantityInput {
+width: 50px;
+}
+<!--Products table end-->
+
+	</style>
 </head>
 <body>
+
+<h1>Musicians Paradise</h1>
+<div class = "navBar">
+    <a href = "/shopHome">Home</a>
+
+    <div class="dropdown">
+        <button class="dropbtn">Products
+        </button>
+        <div class="dropdown-content">
+            <a href="guitars">Guitars</a>
+            <a href="drums">Drums</a>
+            <a href="accessories">Accessories</a>
+        </div>
+    </div>
+    <a href = "Order History">Order History</a>
+    <a href = "cart">Cart</a>
+    <a href = "Account">Account</a>
+
+</div>
+
+
+<h1>Products</h1>
+
+<div class="allProductsList">
+    <div class="product-box" th:each="product : ${accessories}">
+        <div class="product-info">
+            <div class="label">Brand:</div>
+            <div th:text="${product.brand}" class="value"></div>
+        </div>
+        <form action ="/addToCart" method="post">
+            <div class="product-info">
+                <div class="label" >Model:</div>
+                <div  th:text="${product.model}" class="value"></div>
+                <input type="hidden" name="model" th:value="${product.model}" />
+            </div>
+            <div class="product-info">
+                <div class="label">Price:</div>
+                <div th:text="'$' + ${product.price}" class="value"></div>
+                <div class="label">Color:</div>
+                <select name="color" id="color">
+                    <option value="green">green</option>
+                    <option value="purple">purple</option>
+                    <option value="black">black</option>
+                    <option value="white">white</option>
+                    <option value="tobacco sunburst">tobacco sunburst</option>-->
+                </select>
+                <div class = "productBoxQuantityAddToCart">
+                    <label for = quantity>Quantity</label>
+                    <input type="number" class="quantityInput" id="quantity" name="quantity" min =1>
+                    <button type="submit">Add to cart</button></div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<form class="form-signin" method="get" action="/logout">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+</form>
+
 
 </body>
 </html>

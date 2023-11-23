@@ -77,6 +77,12 @@ public class ProductService implements ProductsRepo {
                 "join color c on ci.color_id where ci.product_id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{cartId}, String.class);
     }
+
+    public List<Products> getGuitars(int productTypeId) {
+        String sql = "SELECT * FROM products where product_id = ?";
+        return jdbcTemplate.query(sql, new ProductRowMapper(), productTypeId);
+    }
+
 }
 
 

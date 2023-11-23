@@ -20,4 +20,6 @@ public interface ProductsRepo {
 
     int getCartIdByUsername(String username);
    String getColorNameByCartId(int cartId);
+
+    List<Products> getGuitars(int itemTypeId);
 }
