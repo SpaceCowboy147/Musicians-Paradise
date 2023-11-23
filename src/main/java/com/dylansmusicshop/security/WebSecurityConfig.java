@@ -44,7 +44,7 @@ private DataSource dataSource;
                         .antMatchers("/registration").permitAll()
                         .antMatchers("/registrationServlet").permitAll()
                         .antMatchers("/login").permitAll()
-                        .antMatchers("products/**").permitAll()
+                        .antMatchers("/products/**", "/guitars", "/drums", "/accessories").permitAll()
                         .antMatchers("/addToCart").permitAll()
                         .antMatchers("/loginServlet").permitAll()
                         .antMatchers("/admin").hasAuthority("admin")
