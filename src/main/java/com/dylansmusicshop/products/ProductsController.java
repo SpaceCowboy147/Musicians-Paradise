@@ -15,7 +15,7 @@ ProductService productService;
     public String showGuitarProducts(Model model) {
         List<Products> guitars = productService.getGuitars(1);
         model.addAttribute("guitars", guitars);
-        return "/products/guitars";
+        return "/guitars";
 
     }
 
@@ -24,13 +24,13 @@ ProductService productService;
 
         List<Products> drums = productService.getGuitars(5);
         model.addAttribute("drums", drums);
-        return "/products/drums";
+        return "/drums";
     }
 
     @GetMapping("/accessories")
     public String showAccessoryProducts(Model model) {
         List<Products> accessories = productService.getGuitars(7);
         model.addAttribute("accessories", accessories);
-        return "/products/accessories";
+        return "/accessories";
     }
 }
