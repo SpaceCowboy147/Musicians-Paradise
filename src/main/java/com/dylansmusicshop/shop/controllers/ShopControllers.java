@@ -23,8 +23,8 @@ public class ShopControllers {
     private CartRepo cartRepo;
     @Autowired
     private ProductService productService;
-@Autowired
-private JdbcUser userService;
+    @Autowired
+    private JdbcUser userService;
 
     private final CartItemRepo cartItemRepository;
 
@@ -87,15 +87,11 @@ private JdbcUser userService;
             }
             return "Added to cart";
 
-        } catch (EmptyResultDataAccessException e) { //TODO technically works but its getting multiple items and storing one so it throws this
+        } catch (
+                EmptyResultDataAccessException e) { //TODO technically works but its getting multiple items and storing one so it throws this
             System.out.println("added to cart");
         }
         return "Added to cart";
     }
-        @GetMapping("/account")
-        public String viewAccountPage () {
-            return "account";
-        }
-
-    }
+}
 

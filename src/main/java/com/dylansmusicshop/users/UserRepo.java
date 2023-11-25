@@ -17,4 +17,6 @@ public interface UserRepo {
 
     int findUserIdByUsername(String username);
 
+    int updateUsername(int userId, String newUsername);
+    int updatePassword(String newPassword, int userId);
 }

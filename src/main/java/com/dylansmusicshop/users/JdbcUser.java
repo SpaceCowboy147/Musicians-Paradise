@@ -65,5 +65,18 @@ import java.util.List;
         String sql = "SELECT id from users where username = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, username);
     }
+
+    @Override
+    public int updateUsername(int userId, String newUsername) {
+        String sql = "UPDATE users SET username = ? where id = ?";
+        return jdbcTemplate.update(sql, newUsername, userId);
+    }
+
+    @Override
+    public int updatePassword(String newPassword, int userId) {
+        String sql =  "UPDATE users SET password = ? where id = ?";
+
+        return jdbcTemplate.update(sql, newPassword, userId);
+    }
 }
 
