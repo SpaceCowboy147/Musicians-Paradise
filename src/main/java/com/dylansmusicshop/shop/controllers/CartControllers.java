@@ -71,9 +71,7 @@ public class CartControllers {
             return "cart";
         }
     @PostMapping("/deleteFromCart")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-
-    public void deleteProductFromCart(@RequestParam("quantity")int quantity,
+    public String deleteProductFromCart(@RequestParam("quantity")int quantity,
                                       @RequestParam("productId") int productId,
                                       @RequestParam("colorId") int colorId,
 
@@ -85,7 +83,7 @@ public class CartControllers {
         System.out.println(cartItemId + " " + quantity);
 
         cartItemService.deleteFromCart(quantity, cartItemId);
-
+return "redirect:/cart";
         }
 
     }
