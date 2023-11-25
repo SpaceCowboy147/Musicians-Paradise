@@ -15,7 +15,7 @@ ProductService productService;
     public String showGuitarProducts(Model model) {
         List<Products> guitars = productService.getGuitars(1);
         model.addAttribute("guitars", guitars);
-        return "/products/guitars";
+        return "products/guitars";
 
     }
 

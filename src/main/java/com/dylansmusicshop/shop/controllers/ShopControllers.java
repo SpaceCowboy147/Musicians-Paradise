@@ -87,7 +87,7 @@ private JdbcUser userService;
             }
             return "Added to cart";
 
-        } catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) { //TODO technically works but its getting multiple items and storing one so it throws this
             System.out.println("added to cart");
         }
         return "Added to cart";

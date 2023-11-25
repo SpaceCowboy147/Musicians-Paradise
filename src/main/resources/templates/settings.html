@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>home</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+     body {
+    background-color: #3e3e3e;
+    color: white;
+    }
+
+   /* navBar start*/
+.navBar {
+         list-style-type: none;
+          margin: 0;
+          padding: 0;
+          background-color: #333;
+          border: 2px solid black;
+          }
+            .navBar a {
+             float: left;
+            }
+            .navBar a  {
+                    display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+                }
+             a:hover {
+              background-color: #111;
+            }
+            .contactMe {
+                background-color: black;
+            }
+             /* navBar End */
+
+
+    <!--dropdown start-->
+ .dropdown {
+         position: static;
+         display: inline-block;
+}
+.dropbtn {
+        background-color: #3e3e3e;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #a9a9a9;
+    min-width: 160px;
+    z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+<!--Dropdown End-->
+
+</style>
+
+</head>
+
+
+<body>
+<h1>Musicians Paradise</h1>
+<div class = "navBar">
+    <a href = "/shopHome">Home</a>
+
+    <div class="dropdown">
+        <button class="dropbtn">Products
+        </button>
+        <div class="dropdown-content">
+            <a href="guitars">Guitars</a>
+            <a href="drums">Drums</a>
+            <a href="accessories">Accessories</a>
+        </div>
+    </div>
+    <a href = "Order History">Order History</a>
+    <a href = "cart">Cart</a>
+    <a href = "account">Account</a>
+</div>
+<h2>Settings</h2>
+
+<label id = "username">Change username:</label>
+<input type="text" for="id">
+
+<label id = "password">Change password:</label>
+<input type="text" for="id">
+</body>
+</html>
